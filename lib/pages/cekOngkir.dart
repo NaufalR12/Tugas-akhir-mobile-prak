@@ -11,13 +11,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:paketku/constant/constantVariabel.dart';
 import 'package:paketku/controller/ongkir_controller.dart';
-import 'package:paketku/model/api.dart';
-import 'package:paketku/model/dummy_data_ikon.dart';
-import 'package:paketku/model/kota.dart';
-import 'package:paketku/model/ongkir.dart';
-import 'package:paketku/view/dashboard.dart';
-import 'package:paketku/view/hasil_cek_ongkir.dart';
-import 'package:paketku/view/pengaturan.dart';
+import 'package:paketku/models/api.dart';
+import 'package:paketku/models/dummy_data_ikon.dart';
+import 'package:paketku/models/kota.dart';
+import 'package:paketku/models/ongkir.dart';
+import 'package:paketku/pages/dashboard.dart';
+import 'package:paketku/pages/hasil_cek_ongkir.dart';
+import 'package:paketku/pages/pengaturan.dart';
 
 class CekOngkir extends StatefulWidget {
   const CekOngkir({super.key});

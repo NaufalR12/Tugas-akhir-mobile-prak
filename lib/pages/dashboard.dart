@@ -11,11 +11,11 @@ import 'package:logger/logger.dart';
 import 'package:paketku/controller/tracking_controller.dart';
 import 'package:paketku/controller/riwayat_controller.dart';
 import 'package:paketku/helper/sql_helper.dart';
-import 'package:paketku/model/dummy_data_ikon.dart';
-import 'package:paketku/view/cekOngkir.dart';
-import 'package:paketku/view/pengaturan.dart';
-import 'package:paketku/view/riwayat_view.dart';
-import 'package:paketku/view/tracking.dart';
+import 'package:paketku/models/dummy_data_ikon.dart';
+import 'package:paketku/pages/cekOngkir.dart';
+import 'package:paketku/pages/pengaturan.dart';
+import 'package:paketku/pages/riwayat_view.dart';
+import 'package:paketku/pages/tracking.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});

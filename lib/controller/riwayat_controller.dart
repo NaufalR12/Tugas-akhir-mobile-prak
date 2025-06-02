@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import '../database/database_helper.dart';
-import '../model/riwayat.dart';
+import '../models/riwayat.dart';
 import 'auth_controller.dart';
 
 class RiwayatController extends GetxController {
