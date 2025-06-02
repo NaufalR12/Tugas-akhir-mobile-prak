@@ -1,5 +1,3 @@
-// ignore_for_file: unused_field
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -56,12 +54,13 @@ class _CekOngkirState extends State<CekOngkir> {
         }
       },
       child: Scaffold(
+        backgroundColor: Color(0xFFE0F6FF),
         resizeToAvoidBottomInset: true,
         floatingActionButton: Visibility(
           visible: !keyboardIsOpen,
           child: FloatingActionButton(
-            backgroundColor: Color.fromARGB(255, 55, 202, 236),
-            child: Icon(Icons.home),
+            backgroundColor: Colors.grey,
+            child: Icon(Icons.home, color: Colors.white),
             onPressed: () {
               Get.offAll(
                 () => Dashboard(),
@@ -85,9 +84,9 @@ class _CekOngkirState extends State<CekOngkir> {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(0.0, 1.0), //(x,y)
-                        blurRadius: 2.0,
+                        color: Color(0xFF00C3D4).withOpacity(0.08),
+                        offset: Offset(0.0, 1.0),
+                        blurRadius: 8.0,
                       ),
                     ],
                   ),
@@ -103,8 +102,9 @@ class _CekOngkirState extends State<CekOngkir> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.roboto(
                         fontSize: height * 0.04,
-                        color: Color.fromARGB(255, 246, 142, 37),
+                        color: Color(0xFF00C3D4),
                         fontWeight: FontWeight.bold,
+                        letterSpacing: 2,
                       ),
                     ),
                   ),
@@ -124,7 +124,7 @@ class _CekOngkirState extends State<CekOngkir> {
                         "Kota Asal",
                         style: GoogleFonts.roboto(
                           fontSize: height * 0.02,
-                          color: Color.fromARGB(255, 4, 120, 122),
+                          color: Color(0xFF00C3D4),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -134,38 +134,35 @@ class _CekOngkirState extends State<CekOngkir> {
                         padding: EdgeInsets.all(width * 0.01),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Color.fromARGB(255, 246, 142, 37),
-                            width: 3,
+                            color: Color(0xFF00C3D4),
+                            width: 2.5,
                           ),
-                          borderRadius: new BorderRadius.all(
+                          borderRadius: BorderRadius.all(
                             Radius.circular(width * 0.09),
                           ),
                           color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xFF00C3D4).withOpacity(0.08),
+                              blurRadius: 8,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              width: width * 0.05,
-                            ),
-                            Icon(
-                              Icons.search,
-                              color: Color.fromARGB(255, 246, 142, 37),
-                            ),
-                            SizedBox(
-                              width: width * 0.02,
-                            ),
+                            SizedBox(width: width * 0.05),
+                            Icon(Icons.search, color: Color(0xFF00C3D4)),
+                            SizedBox(width: width * 0.02),
                             SizedBox(
                               width: width * 0.6,
                               height: height * 0.14,
                               child: DropdownSearch<Kota>(
                                 dropdownDecoratorProps: DropDownDecoratorProps(
                                   dropdownSearchDecoration: InputDecoration(
-                                    prefixIconColor:
-                                        Color.fromARGB(255, 246, 142, 37),
-                                    suffixIconColor:
-                                        Color.fromARGB(255, 246, 142, 37),
-                                    // helperText: "  Kota Asal",
+                                    prefixIconColor: Color(0xFF00C3D4),
+                                    suffixIconColor: Color(0xFF00C3D4),
                                     border: InputBorder.none,
                                   ),
                                 ),
@@ -189,13 +186,10 @@ class _CekOngkirState extends State<CekOngkir> {
                                   final http = new IOClient(ioc);
                                   var response = await http.get(Uri.parse(
                                       "https://api.rajaongkir.com/starter/city?key=$key"));
-
                                   List allKota = (jsonDecode(response.body)
                                           as Map<String, dynamic>)['rajaongkir']
                                       ['results'];
-
                                   var dataKota = Kota.fromJsonList(allKota);
-
                                   return dataKota;
                                 },
                               ),
@@ -220,7 +214,7 @@ class _CekOngkirState extends State<CekOngkir> {
                         "Total Berat Paket",
                         style: GoogleFonts.roboto(
                           fontSize: height * 0.018,
-                          color: Color.fromARGB(255, 4, 120, 122),
+                          color: Color(0xFF00C3D4),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -230,31 +224,28 @@ class _CekOngkirState extends State<CekOngkir> {
                         padding: EdgeInsets.all(width * 0.01),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Color.fromARGB(255, 246, 142, 37),
-                            width: 3,
+                            color: Color(0xFF00C3D4),
+                            width: 2.5,
                           ),
-                          borderRadius: new BorderRadius.all(
+                          borderRadius: BorderRadius.all(
                             Radius.circular(width * 0.09),
                           ),
                           color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xFF00C3D4).withOpacity(0.08),
+                              blurRadius: 8,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
                         ),
                         child: Row(
                           children: [
-                            SizedBox(
-                              width: width * 0.02,
-                            ),
-                            SizedBox(
-                              width: width * 0.01,
-                              child: Icon(
-                                Icons.monitor_weight_outlined,
-                                color: Color.fromARGB(255, 246, 142, 37),
-                              ),
-                            ),
-                            SizedBox(
-                              width: width * 0.1,
-                            ),
-                            SizedBox(
-                              width: width * 0.55,
+                            SizedBox(width: width * 0.02),
+                            Icon(Icons.monitor_weight_outlined,
+                                color: Color(0xFF00C3D4)),
+                            SizedBox(width: width * 0.04),
+                            Expanded(
                               child: GestureDetector(
                                 onTap: () => FocusManager.instance.primaryFocus
                                     ?.unfocus(),
@@ -262,26 +253,29 @@ class _CekOngkirState extends State<CekOngkir> {
                                     FocusManager.instance.primaryFocus
                                         ?.unfocus(),
                                 child: TextField(
-                                  //input hanya angka
                                   keyboardType: TextInputType.number,
-
                                   onChanged: (text) {
                                     berat = text;
                                   },
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Masukkan berat',
+                                    hintStyle: TextStyle(
+                                        fontSize: 14, color: Colors.grey),
+                                  ),
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: width * 0.09,
-                              child: Text(
-                                "gr",
-                                style: GoogleFonts.roboto(
-                                  fontSize: height * 0.018,
-                                  color: Color.fromARGB(255, 246, 142, 37),
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            SizedBox(width: width * 0.02),
+                            Text(
+                              "gr",
+                              style: GoogleFonts.roboto(
+                                fontSize: height * 0.018,
+                                color: Color(0xFF00C3D4),
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
+                            SizedBox(width: width * 0.02),
                           ],
                         ),
                       ),
@@ -302,7 +296,7 @@ class _CekOngkirState extends State<CekOngkir> {
                         "Kota Tujuan",
                         style: GoogleFonts.roboto(
                           fontSize: height * 0.018,
-                          color: Color.fromARGB(255, 4, 120, 122),
+                          color: Color(0xFF00C3D4),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -312,37 +306,34 @@ class _CekOngkirState extends State<CekOngkir> {
                         padding: EdgeInsets.all(width * 0.01),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Color.fromARGB(255, 246, 142, 37),
-                            width: 3,
+                            color: Color(0xFF00C3D4),
+                            width: 2.5,
                           ),
-                          borderRadius: new BorderRadius.all(
+                          borderRadius: BorderRadius.all(
                             Radius.circular(width * 0.09),
                           ),
                           color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xFF00C3D4).withOpacity(0.08),
+                              blurRadius: 8,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
                         ),
                         child: Row(
                           children: [
-                            SizedBox(
-                              width: width * 0.05,
-                            ),
-                            Icon(
-                              Icons.search,
-                              color: Color.fromARGB(255, 246, 142, 37),
-                            ),
-                            SizedBox(
-                              width: width * 0.02,
-                            ),
+                            SizedBox(width: width * 0.05),
+                            Icon(Icons.search, color: Color(0xFF00C3D4)),
+                            SizedBox(width: width * 0.02),
                             SizedBox(
                               width: width * 0.6,
                               height: height * 0.16,
                               child: DropdownSearch<Kota>(
                                 dropdownDecoratorProps: DropDownDecoratorProps(
                                   dropdownSearchDecoration: InputDecoration(
-                                    prefixIconColor:
-                                        Color.fromARGB(255, 246, 142, 37),
-                                    suffixIconColor:
-                                        Color.fromARGB(255, 246, 142, 37),
-                                    // helperText: "  Kota Asal",
+                                    prefixIconColor: Color(0xFF00C3D4),
+                                    suffixIconColor: Color(0xFF00C3D4),
                                     border: InputBorder.none,
                                   ),
                                 ),
@@ -366,13 +357,10 @@ class _CekOngkirState extends State<CekOngkir> {
                                   final http = new IOClient(ioc);
                                   var response = await http.get(Uri.parse(
                                       "https://api.rajaongkir.com/starter/city?key=$key"));
-
                                   List allKota = (jsonDecode(response.body)
                                           as Map<String, dynamic>)['rajaongkir']
                                       ['results'];
-
                                   var dataKota = Kota.fromJsonList(allKota);
-
                                   return dataKota;
                                 },
                               ),
@@ -397,7 +385,7 @@ class _CekOngkirState extends State<CekOngkir> {
                         "Jasa Kirim",
                         style: GoogleFonts.roboto(
                           fontSize: height * 0.018,
-                          color: Color.fromARGB(255, 4, 120, 122),
+                          color: Color(0xFF00C3D4),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -407,59 +395,60 @@ class _CekOngkirState extends State<CekOngkir> {
                         padding: EdgeInsets.all(width * 0.01),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Color.fromARGB(255, 246, 142, 37),
-                            width: 3,
+                            color: Color(0xFF00C3D4),
+                            width: 2.5,
                           ),
-                          borderRadius: new BorderRadius.all(
+                          borderRadius: BorderRadius.all(
                             Radius.circular(width * 0.09),
                           ),
                           color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xFF00C3D4).withOpacity(0.08),
+                              blurRadius: 8,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
                         ),
                         child: GestureDetector(
                           onTap: _handleClick,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                width: width * 0.05,
-                              ),
-                              Icon(
-                                Icons.search,
-                                color: Color.fromARGB(255, 246, 142, 37),
-                              ),
+                              SizedBox(width: width * 0.05),
+                              Icon(Icons.search, color: Color(0xFF00C3D4)),
                               SizedBox(
                                 width: width * 0.35,
                                 child: Center(
                                   child: Obx(
-                                    () => SvgPicture.asset(
-                                      controllerOngkir.namaSVG.value == ''
-                                          ? ''
-                                          : controllerOngkir.namaSVG.value,
-                                      width: width * 0.02,
-                                      height: width * 0.05,
-                                    ),
+                                    () => controllerOngkir.namaSVG.value == ''
+                                        ? SizedBox()
+                                        : SvgPicture.asset(
+                                            controllerOngkir.namaSVG.value,
+                                            width: width * 0.06,
+                                            height: width * 0.06,
+                                          ),
                                   ),
                                 ),
                               ),
                               SizedBox(
-                                  width: width * 0.25,
-                                  child: Obx(
-                                    () => Text(
-                                      controllerOngkir.namaJasa.value == ''
-                                          ? ''
-                                          : controllerOngkir.namaJasa.value,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: GoogleFonts.roboto(
-                                        fontSize: height * 0.018,
-                                        color: Color.fromARGB(255, 4, 120, 122),
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                width: width * 0.25,
+                                child: Obx(
+                                  () => Text(
+                                    controllerOngkir.namaJasa.value == ''
+                                        ? ''
+                                        : controllerOngkir.namaJasa.value,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.roboto(
+                                      fontSize: height * 0.018,
+                                      color: Color(0xFF00C3D4),
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  )),
-                              Icon(
-                                Icons.arrow_drop_down,
-                                color: Color.fromARGB(255, 246, 142, 37),
+                                  ),
+                                ),
                               ),
+                              Icon(Icons.arrow_drop_down,
+                                  color: Color(0xFF00C3D4)),
                             ],
                           ),
                         ),
@@ -476,15 +465,15 @@ class _CekOngkirState extends State<CekOngkir> {
                     width: width * 0.35,
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(
-                          Color.fromARGB(255, 246, 142, 37),
-                        ),
+                        backgroundColor:
+                            WidgetStateProperty.all(Color(0xFF00C3D4)),
                         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.white),
                           ),
                         ),
+                        elevation: WidgetStateProperty.all(2),
                       ),
                       onPressed: () {
                         if (kota_asal == null ||
@@ -496,7 +485,7 @@ class _CekOngkirState extends State<CekOngkir> {
                             "Silahkan isi semua kolom terlebih dahulu",
                             icon: Icon(Icons.block_outlined, color: Colors.red),
                             snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Color.fromARGB(128, 246, 142, 37),
+                            backgroundColor: Color(0xFF00C3D4).withOpacity(0.1),
                             borderRadius: 20,
                             margin: EdgeInsets.all(15),
                             colorText: Colors.black,
@@ -523,6 +512,7 @@ class _CekOngkirState extends State<CekOngkir> {
                         "Cari",
                         style: GoogleFonts.roboto(
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -565,7 +555,6 @@ class _CekOngkirState extends State<CekOngkir> {
                 child: Container(
                   padding: EdgeInsets.all(20),
                   child: ListView(
-                    // shrinkWrap: true,
                     children: [
                       Align(
                         alignment: Alignment.topRight,
@@ -652,6 +641,8 @@ class _CekOngkirState extends State<CekOngkir> {
         bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),
           notchMargin: 5,
+          color: Colors.white,
+          elevation: 8,
           child: SizedBox(
             height: 60,
             child: Row(
@@ -665,7 +656,7 @@ class _CekOngkirState extends State<CekOngkir> {
                     decoration: BoxDecoration(
                       border: Border(
                         top: BorderSide(
-                          color: Color.fromARGB(255, 246, 142, 37),
+                          color: Color(0xFF00C3D4),
                           width: 3,
                         ),
                       ),
@@ -675,12 +666,12 @@ class _CekOngkirState extends State<CekOngkir> {
                       children: <Widget>[
                         Icon(
                           Icons.price_change_outlined,
-                          color: Color.fromARGB(255, 246, 142, 37),
+                          color: Color(0xFF00C3D4),
                         ),
                         Text(
                           'Cek Ongkir',
                           style: GoogleFonts.roboto(
-                            color: Color.fromARGB(255, 246, 142, 37),
+                            color: Color(0xFF00C3D4),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -703,11 +694,14 @@ class _CekOngkirState extends State<CekOngkir> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(
-                          Icons.dehaze_sharp,
+                          Icons.settings,
+                          color: Colors.grey,
                         ),
                         Text(
                           'Pengaturan',
-                          style: TextStyle(),
+                          style: GoogleFonts.roboto(
+                            color: Colors.grey,
+                          ),
                         ),
                       ],
                     ),

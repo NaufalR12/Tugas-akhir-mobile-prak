@@ -1,5 +1,3 @@
-// ignore_for_file: unused_local_variable, must_be_immutable, unused_field
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -105,13 +103,7 @@ class _DashboardState extends State<Dashboard> {
         child: FloatingActionButton(
           backgroundColor: Color(0xFF00C3D4),
           child: Icon(Icons.home, color: Colors.white),
-          onPressed: () {
-            Get.offAll(
-              () => Dashboard(),
-              transition: Transition.fadeIn,
-              duration: Duration(seconds: 1),
-            );
-          },
+          onPressed: () {},
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -128,7 +120,7 @@ class _DashboardState extends State<Dashboard> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Color(0xFFE0F6FF).withOpacity(0.65),
+              color: Color(0xFFE0F6FF).withOpacity(0.5),
             ),
             child: Container(
               padding: EdgeInsets.only(
@@ -691,6 +683,8 @@ class _DashboardState extends State<Dashboard> {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 5,
+        color: Colors.white,
+        elevation: 8,
         child: SizedBox(
           height: 60,
           child: Row(
@@ -712,10 +706,13 @@ class _DashboardState extends State<Dashboard> {
                     children: <Widget>[
                       Icon(
                         Icons.price_change_outlined,
+                        color: Colors.grey,
                       ),
                       Text(
                         'Cek Ongkir',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.roboto(
+                          color: Colors.grey,
+                        ),
                       ),
                     ],
                   ),
@@ -736,11 +733,14 @@ class _DashboardState extends State<Dashboard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Icon(
-                        Icons.dehaze_sharp,
+                        Icons.settings,
+                        color: Colors.grey,
                       ),
                       Text(
                         'Pengaturan',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.roboto(
+                          color: Colors.grey,
+                        ),
                       ),
                     ],
                   ),

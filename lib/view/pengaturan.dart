@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +9,6 @@ import '../controller/auth_controller.dart';
 import 'login_view.dart';
 import 'profil_view.dart';
 import 'package:paketku/controller/theme_controller.dart';
-// import 'package:paketku/widget/lainnya/rating_widget.dart';
 
 class Pengaturan extends StatefulWidget {
   const Pengaturan({super.key});
@@ -33,8 +30,8 @@ class _PengaturanState extends State<Pengaturan> {
       floatingActionButton: Visibility(
         visible: !keyboardIsOpen,
         child: FloatingActionButton(
-          backgroundColor: Color(0xFF00C3D4),
-          child: Icon(Icons.home),
+          backgroundColor: Colors.grey,
+          child: Icon(Icons.home, color: Colors.white),
           onPressed: () {
             Get.offAll(
               () => Dashboard(),

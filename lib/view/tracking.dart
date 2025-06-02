@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable, unused_local_variable, no_leading_underscores_for_local_identifiers
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
