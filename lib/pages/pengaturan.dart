@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paketku/constant/constantVariabel.dart';
-import 'package:paketku/view/cekOngkir.dart';
-import 'package:paketku/view/dashboard.dart';
-import 'package:paketku/widget/lainnya/delete_widget.dart';
+import 'package:GoShipp/constant/constantVariabel.dart';
+import 'package:GoShipp/pages/cekOngkir.dart';
+import 'package:GoShipp/pages/dashboard.dart';
+import 'package:GoShipp/widget/lainnya/delete_widget.dart';
 import '../controller/auth_controller.dart';
 import 'login_view.dart';
 import 'profil_view.dart';
-import 'package:paketku/controller/theme_controller.dart';
+import 'package:GoShipp/controller/theme_controller.dart';
 
 class Pengaturan extends StatefulWidget {
   const Pengaturan({super.key});

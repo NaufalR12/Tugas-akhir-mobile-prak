@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bcrypt/bcrypt.dart';
 import '../database/database_helper.dart';
-import '../model/user.dart';
-import 'package:paketku/controller/riwayat_controller.dart';
+import '../models/user.dart';
+import 'package:GoShipp/controller/riwayat_controller.dart';
 
 class AuthController extends GetxController {
   final DatabaseHelper _dbHelper = DatabaseHelper.instance;

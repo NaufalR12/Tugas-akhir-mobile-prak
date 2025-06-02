@@ -1,7 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import '../model/user.dart';
-import '../model/riwayat.dart';
+import '../models/user.dart';
+import '../models/riwayat.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();

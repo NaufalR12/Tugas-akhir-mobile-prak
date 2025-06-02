@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
-import 'package:paketku/constant/constantVariabel.dart';
-import 'package:paketku/helper/sql_helper.dart';
+import 'package:GoShipp/constant/constantVariabel.dart';
+import 'package:GoShipp/helper/sql_helper.dart';
 
 class DeleteAllWidget extends StatelessWidget {
   IconData namaIcon;

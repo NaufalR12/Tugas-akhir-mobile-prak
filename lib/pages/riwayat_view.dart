@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/riwayat_controller.dart';
 import '../controller/auth_controller.dart';
-import '../model/riwayat.dart';
+import '../models/riwayat.dart';
 
 class RiwayatView extends StatelessWidget {
   final RiwayatController riwayatController = Get.find<RiwayatController>();

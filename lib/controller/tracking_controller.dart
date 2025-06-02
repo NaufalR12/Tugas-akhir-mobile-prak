@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:http/io_client.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:paketku/helper/sql_helper.dart';
-import 'package:paketku/model/api.dart';
-import 'package:paketku/model/receipt.dart';
-import 'package:paketku/controller/riwayat_controller.dart';
-import 'package:paketku/controller/auth_controller.dart';
+import 'package:GoShipp/helper/sql_helper.dart';
+import 'package:GoShipp/models/api.dart';
+import 'package:GoShipp/models/receipt.dart';
+import 'package:GoShipp/controller/riwayat_controller.dart';
+import 'package:GoShipp/controller/auth_controller.dart';
 
 class TrackingController extends GetxController {
   String alamat = "";

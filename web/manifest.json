@@ -1,6 +1,6 @@
 {
-    "name": "paketku",
-    "short_name": "paketku",
+    "name": "GoShipp",
+    "short_name": "GoShipp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

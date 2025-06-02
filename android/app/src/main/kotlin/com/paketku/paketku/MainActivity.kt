@@ -1,4 +1,4 @@
-package com.paketku.paketku
+package com.GoShipp
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paketku/controller/tracking_controller.dart';
-import 'package:paketku/model/receipt.dart';
-import 'package:paketku/view/cekOngkir.dart';
-import 'package:paketku/view/dashboard.dart';
-import 'package:paketku/view/pengaturan.dart';
+import 'package:GoShipp/controller/tracking_controller.dart';
+import 'package:GoShipp/models/receipt.dart';
+import 'package:GoShipp/pages/cekOngkir.dart';
+import 'package:GoShipp/pages/dashboard.dart';
+import 'package:GoShipp/pages/pengaturan.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class Tracking2 extends StatefulWidget {

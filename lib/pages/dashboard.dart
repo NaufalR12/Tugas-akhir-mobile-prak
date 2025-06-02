@@ -6,14 +6,14 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
-import 'package:paketku/controller/tracking_controller.dart';
-import 'package:paketku/controller/riwayat_controller.dart';
-import 'package:paketku/helper/sql_helper.dart';
-import 'package:paketku/model/dummy_data_ikon.dart';
-import 'package:paketku/view/cekOngkir.dart';
-import 'package:paketku/view/pengaturan.dart';
-import 'package:paketku/view/riwayat_view.dart';
-import 'package:paketku/view/tracking.dart';
+import 'package:GoShipp/controller/tracking_controller.dart';
+import 'package:GoShipp/controller/riwayat_controller.dart';
+import 'package:GoShipp/helper/sql_helper.dart';
+import 'package:GoShipp/models/dummy_data_ikon.dart';
+import 'package:GoShipp/pages/cekOngkir.dart';
+import 'package:GoShipp/pages/pengaturan.dart';
+import 'package:GoShipp/pages/riwayat_view.dart';
+import 'package:GoShipp/pages/tracking.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
