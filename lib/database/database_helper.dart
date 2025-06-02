@@ -21,8 +21,24 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: _createDB,
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          // Buat tabel riwayat jika belum ada
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS riwayat (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              user_id INTEGER NOT NULL,
+              no_resi TEXT NOT NULL,
+              kurir TEXT NOT NULL,
+              status TEXT NOT NULL,
+              tanggal TEXT NOT NULL,
+              FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+            )
+          ''');
+        }
+      },
     );
   }
 

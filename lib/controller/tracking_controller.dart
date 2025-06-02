@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:paketku/helper/sql_helper.dart';
 import 'package:paketku/model/api.dart';
 import 'package:paketku/model/receipt.dart';
+import 'package:paketku/controller/riwayat_controller.dart';
+import 'package:paketku/controller/auth_controller.dart';
 
 class TrackingController extends GetxController {
   String alamat = "";
@@ -16,6 +18,8 @@ class TrackingController extends GetxController {
   Map<String, dynamic> map = {};
   RxString namaSVG = "".obs;
   RxString namajs = "".obs;
+  final RiwayatController _riwayatController = Get.put(RiwayatController());
+  final AuthController _authController = Get.find<AuthController>();
 
   void gantiSvg(
     String namaSVG,
@@ -54,10 +58,16 @@ class TrackingController extends GetxController {
         },
       );
       if (response.statusCode == 200) {
-        // print(response.body);
-        // print(namaSVG);
-        // print(jKirim);
-        alamat = jsonDecode(response.body)['data']['detail']['destination'];
+        final responseData = jsonDecode(response.body);
+        alamat = responseData['data']['detail']['destination'];
+
+        // Simpan ke riwayat jika user sudah login
+        if (_authController.isLoggedIn.value) {
+          final status = responseData['data']['summary']['status'] ?? 'Unknown';
+          await _riwayatController.addRiwayat(receipt, jKirim, status);
+        }
+
+        // Simpan ke SQLHelper untuk kompatibilitas
         await SQLHelper.createItem(
           receipt,
           alamat,
@@ -65,14 +75,14 @@ class TrackingController extends GetxController {
           jKirim,
         );
 
-        return Receipt.fromJson(jsonDecode(response.body));
+        return Receipt.fromJson(responseData);
       } else {
-        throw jsonDecode(response.body)['message'] + ". \nSilahkan ulangi lagi";
+        throw 'Gagal mengambil data, cek kembali inputan anda';
       }
     } on SocketException {
       throw 'Mohon Cek internet anda';
     } on TimeoutException {
-      throw 'Waktu Habis , silahkan reload halaman';
+      throw 'Waktu habis. Silahkan Reload halaman';
     }
   }
 }
