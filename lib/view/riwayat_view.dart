@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/riwayat_controller.dart';
+import '../controller/auth_controller.dart';
 import '../model/riwayat.dart';
 
 class RiwayatView extends StatelessWidget {
   final RiwayatController riwayatController = Get.put(RiwayatController());
+  final AuthController authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
+    // Cek status login
+    if (!authController.isLoggedIn.value) {
+      // Redirect ke halaman login jika belum login
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Get.offAllNamed('/login');
+        Get.snackbar(
+          'Akses Ditolak',
+          'Silahkan login terlebih dahulu untuk melihat riwayat pelacakan',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      });
+      return Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Riwayat Pelacakan'),
