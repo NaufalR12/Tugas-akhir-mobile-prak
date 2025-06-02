@@ -8,6 +8,7 @@ class LoginView extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final RxBool isLoading = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -97,12 +98,13 @@ class LoginView extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 28),
-                      Obx(() => authController.isLoggedIn.value
+                      Obx(() => isLoading.value
                           ? const Center(child: CircularProgressIndicator())
                           : SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
                                 onPressed: () async {
+                                  isLoading.value = true;
                                   try {
                                     final success = await authController.login(
                                       usernameController.text,
@@ -117,6 +119,8 @@ class LoginView extends StatelessWidget {
                                       e.toString(),
                                       snackPosition: SnackPosition.BOTTOM,
                                     );
+                                  } finally {
+                                    isLoading.value = false;
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -145,11 +149,11 @@ class LoginView extends StatelessWidget {
                           onTap: () => Get.to(() => RegisterView()),
                           child: const Text.rich(
                             TextSpan(
-                              text: 'Sudah Punya Akun? ',
+                              text: 'Belum Punya Akun? ',
                               style: TextStyle(color: Colors.black54),
                               children: [
                                 TextSpan(
-                                  text: 'Masuk',
+                                  text: 'Daftar',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
