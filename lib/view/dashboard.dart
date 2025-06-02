@@ -26,7 +26,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final trackController = Get.put(TrackingController());
-  final riwayatController = Get.put(RiwayatController());
+  final riwayatController = Get.find<RiwayatController>();
   Position? _currentPosition;
   static double _minHeight = 0, _maxHeight = 500;
   Offset _offset = Offset(0, _minHeight);

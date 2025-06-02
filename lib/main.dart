@@ -10,8 +10,13 @@ import 'controller/auth_controller.dart';
 import 'controller/theme_controller.dart';
 import 'view/login_view.dart';
 import 'view/onboarding_page.dart';
+import 'package:paketku/controller/riwayat_controller.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final AuthController authController = Get.put(AuthController());
+  final ThemeController themeController = Get.put(ThemeController());
+  Get.put(RiwayatController());
   runApp(MyApp());
 }
 

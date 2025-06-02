@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bcrypt/bcrypt.dart';
 import '../database/database_helper.dart';
 import '../model/user.dart';
+import 'package:paketku/controller/riwayat_controller.dart';
 
 class AuthController extends GetxController {
   final DatabaseHelper _dbHelper = DatabaseHelper.instance;
@@ -91,6 +92,8 @@ class AuthController extends GetxController {
 
       currentUser.value = user;
       isLoggedIn.value = true;
+      // Trigger reload riwayat
+      Get.find<RiwayatController>().loadRiwayat();
       return true;
     } catch (e) {
       rethrow;
@@ -102,6 +105,8 @@ class AuthController extends GetxController {
     await prefs.remove('user_id');
     currentUser.value = null;
     isLoggedIn.value = false;
+    // Trigger reload riwayat
+    Get.find<RiwayatController>().loadRiwayat();
   }
 
   Future<bool> updateProfile({

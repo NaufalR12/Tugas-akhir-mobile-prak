@@ -5,7 +5,7 @@ import '../controller/auth_controller.dart';
 import '../model/riwayat.dart';
 
 class RiwayatView extends StatelessWidget {
-  final RiwayatController riwayatController = Get.put(RiwayatController());
+  final RiwayatController riwayatController = Get.find<RiwayatController>();
   final AuthController authController = Get.find<AuthController>();
 
   @override
