@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import '../model/user.dart';
+import '../model/riwayat.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
@@ -35,6 +36,18 @@ class DatabaseHelper {
         nama_lengkap TEXT,
         alamat TEXT,
         no_hp TEXT
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE riwayat (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        no_resi TEXT NOT NULL,
+        kurir TEXT NOT NULL,
+        status TEXT NOT NULL,
+        tanggal TEXT NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
       )
     ''');
   }
@@ -96,5 +109,40 @@ class DatabaseHelper {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('users');
     return List.generate(maps.length, (i) => User.fromMap(maps[i]));
+  }
+
+  // Riwayat CRUD Operations
+  Future<int> createRiwayat(Riwayat riwayat) async {
+    final db = await database;
+    return await db.insert('riwayat', riwayat.toMap());
+  }
+
+  Future<List<Riwayat>> getRiwayatByUserId(int userId) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'riwayat',
+      where: 'user_id = ?',
+      whereArgs: [userId],
+      orderBy: 'tanggal DESC',
+    );
+    return List.generate(maps.length, (i) => Riwayat.fromMap(maps[i]));
+  }
+
+  Future<int> deleteRiwayat(int id) async {
+    final db = await database;
+    return await db.delete(
+      'riwayat',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<int> deleteAllRiwayatByUserId(int userId) async {
+    final db = await database;
+    return await db.delete(
+      'riwayat',
+      where: 'user_id = ?',
+      whereArgs: [userId],
+    );
   }
 }

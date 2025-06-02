@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:paketku/view/dashboard.dart';
 import 'controller/auth_controller.dart';
+import 'controller/theme_controller.dart';
 import 'view/login_view.dart';
 
 void main() {
@@ -15,15 +16,31 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
+  final ThemeController themeController = Get.put(ThemeController());
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'PaketKU',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+      theme: ThemeData.light().copyWith(
+        primaryColor: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+        ),
+        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
       ),
+      darkTheme: ThemeData.dark().copyWith(
+        primaryColor: Colors.blue,
+        scaffoldBackgroundColor: Color(0xFF121212),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color(0xFF1F1F1F),
+          foregroundColor: Colors.white,
+        ),
+        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
+      ),
+      themeMode: ThemeMode.system,
       home: Obx(
           () => authController.isLoggedIn.value ? Dashboard() : LoginView()),
     );

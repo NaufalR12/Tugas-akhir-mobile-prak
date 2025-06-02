@@ -12,6 +12,7 @@ import 'package:paketku/widget/lainnya/email_to_widget.dart';
 import '../controller/auth_controller.dart';
 import 'login_view.dart';
 import 'profil_view.dart';
+import 'package:paketku/controller/theme_controller.dart';
 // import 'package:paketku/widget/lainnya/rating_widget.dart';
 
 class Lainnya extends StatefulWidget {
@@ -22,9 +23,11 @@ class Lainnya extends StatefulWidget {
 }
 
 class _LainnyaState extends State<Lainnya> {
+  final AuthController authController = Get.find<AuthController>();
+  final ThemeController themeController = Get.find<ThemeController>();
+
   @override
   Widget build(BuildContext context) {
-    final AuthController authController = Get.find<AuthController>();
     bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 223, 223, 223),
@@ -126,6 +129,20 @@ class _LainnyaState extends State<Lainnya> {
                   namaIcon: Icons.mail,
                   isiText: "Kontak Kami",
                 ),
+                Obx(() => ListTile(
+                      leading: Icon(
+                        themeController.isDarkMode
+                            ? Icons.light_mode
+                            : Icons.dark_mode,
+                        color: themeController.isDarkMode
+                            ? Colors.amber
+                            : Colors.grey,
+                      ),
+                      title: Text(themeController.isDarkMode
+                          ? 'Mode Terang'
+                          : 'Mode Gelap'),
+                      onTap: () => themeController.toggleTheme(),
+                    )),
                 ListTile(
                   leading: Icon(Icons.person, color: Colors.blue),
                   title: Text('Profil'),
