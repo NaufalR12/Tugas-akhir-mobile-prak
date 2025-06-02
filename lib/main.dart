@@ -9,6 +9,7 @@ import 'package:paketku/view/dashboard.dart';
 import 'controller/auth_controller.dart';
 import 'controller/theme_controller.dart';
 import 'view/login_view.dart';
+import 'view/onboarding_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,8 +42,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
       ),
       themeMode: ThemeMode.system,
-      home: Obx(
-          () => authController.isLoggedIn.value ? Dashboard() : LoginView()),
+      home: OnboardingPage(),
     );
   }
 }

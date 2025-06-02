@@ -8,6 +8,7 @@ class AuthController extends GetxController {
   final DatabaseHelper _dbHelper = DatabaseHelper.instance;
   final Rx<User?> currentUser = Rx<User?>(null);
   final RxBool isLoggedIn = false.obs;
+  RxBool isPasswordHidden = true.obs;
 
   @override
   void onInit() {
