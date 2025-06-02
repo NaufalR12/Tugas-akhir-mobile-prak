@@ -27,6 +27,7 @@ class AuthController extends GetxController {
       if (user != null) {
         currentUser.value = user;
         isLoggedIn.value = true;
+        Get.find<RiwayatController>().loadRiwayat();
       }
     }
   }

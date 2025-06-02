@@ -98,12 +98,13 @@ class _DashboardState extends State<Dashboard> {
     bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
 
     return Scaffold(
+      backgroundColor: Color(0xFFE0F6FF),
       resizeToAvoidBottomInset: false,
       floatingActionButton: Visibility(
         visible: !keyboardIsOpen,
         child: FloatingActionButton(
-          backgroundColor: Color.fromARGB(255, 55, 202, 236),
-          child: Icon(Icons.home),
+          backgroundColor: Color(0xFF00C3D4),
+          child: Icon(Icons.home, color: Colors.white),
           onPressed: () {
             Get.offAll(
               () => Dashboard(),
@@ -118,18 +119,20 @@ class _DashboardState extends State<Dashboard> {
         alignment: Alignment.bottomCenter,
         children: [
           Container(
-            decoration: new BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage('assets/dashboard_bg4.jpg'),
               ),
             ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Color(0xFFE0F6FF).withOpacity(0.65),
+            ),
             child: Container(
               padding: EdgeInsets.only(
                   top: width * 0.05, right: width * 0.05, left: width * 0.05),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 198, 197, 197).withAlpha(204),
-              ),
               child: ListView(
                 children: [
                   Center(
@@ -138,27 +141,23 @@ class _DashboardState extends State<Dashboard> {
                       style: GoogleFonts.roboto(
                         fontSize: height * 0.045,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Color(0xFF00C3D4),
                         wordSpacing: 5,
                         letterSpacing: 2,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: height * 0.04,
-                  ),
+                  SizedBox(height: height * 0.04),
                   Center(
                     child: Text(
                       "Lokasi Anda",
                       style: GoogleFonts.roboto(
                         fontSize: height * 0.02,
-                        color: Colors.white,
+                        color: Color(0xFF00C3D4),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
+                  SizedBox(height: height * 0.01),
                   if (_currentPosition != null && _currentAddress != null)
                     Center(
                       child: Text(
@@ -166,60 +165,60 @@ class _DashboardState extends State<Dashboard> {
                         style: GoogleFonts.roboto(
                           fontSize: height * 0.02,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Color(0xFF00C3D4),
                         ),
                       ),
                     ),
-                  SizedBox(
-                    height: height * 0.04,
-                  ),
+                  SizedBox(height: height * 0.04),
                   Center(
                     child: Text(
                       "Masukkan No. Resi Anda",
                       style: GoogleFonts.roboto(
-                        color: Color.fromARGB(255, 5, 78, 94),
+                        color: Color(0xFF00C3D4),
                         fontSize: height * 0.02,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
+                  SizedBox(height: height * 0.01),
                   Center(
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Color.fromARGB(255, 246, 142, 37),
+                          color: Color(0xFF00C3D4),
                         ),
-                        borderRadius: new BorderRadius.all(
+                        borderRadius: BorderRadius.all(
                           Radius.circular(width * 0.05),
                         ),
                         color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFF00C3D4).withOpacity(0.08),
+                            blurRadius: 8,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
                       ),
                       width: width * 0.8,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            width: width * 0.05,
-                          ),
-                          Icon(
-                            Icons.search,
-                            color: Color.fromARGB(255, 246, 142, 37),
-                          ),
+                          SizedBox(width: width * 0.05),
+                          Icon(Icons.search, color: Color(0xFF00C3D4)),
                           SizedBox(
                             width: width * 0.6,
                             height: height * 0.05,
                             child: TextField(
                               textAlignVertical: TextAlignVertical.bottom,
                               style: GoogleFonts.roboto(
-                                color: Color.fromARGB(255, 2, 84, 86),
+                                color: Color(0xFF00C3D4),
                               ),
                               controller: trackController.receipt,
                               textAlign: TextAlign.start,
                               decoration: InputDecoration(
                                 hintText: "Masukkan nomor resi disini",
+                                hintStyle: TextStyle(
+                                    color: Color(0xFF00C3D4).withOpacity(0.5)),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white.withAlpha(128),
@@ -229,7 +228,7 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Colors.white.withAlpha(128),
+                                    color: Color(0xFF00C3D4),
                                   ),
                                   borderRadius:
                                       BorderRadius.circular(width * 0.1),
@@ -241,32 +240,35 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: height * 0.025,
-                  ),
+                  SizedBox(height: height * 0.025),
                   Center(
                     child: Text(
                       "Pilih Jasa Kirim",
                       style: GoogleFonts.roboto(
-                        color: Color.fromARGB(255, 5, 78, 94),
+                        color: Color(0xFF00C3D4),
                         fontSize: height * 0.02,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
+                  SizedBox(height: height * 0.01),
                   Center(
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Color.fromARGB(255, 246, 142, 37),
+                          color: Color(0xFF00C3D4),
                         ),
-                        borderRadius: new BorderRadius.all(
+                        borderRadius: BorderRadius.all(
                           Radius.circular(width * 0.05),
                         ),
                         color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFF00C3D4).withOpacity(0.08),
+                            blurRadius: 8,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
                       ),
                       width: width * 0.6,
                       height: height * 0.05,
@@ -275,47 +277,37 @@ class _DashboardState extends State<Dashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              width: width * 0.05,
-                            ),
-                            Icon(
-                              Icons.search,
-                              color: Color.fromARGB(255, 246, 142, 37),
-                            ),
+                            SizedBox(width: width * 0.05),
+                            Icon(Icons.search, color: Color(0xFF00C3D4)),
                             SizedBox(
                               width: width * 0.35,
                               child: Center(
                                 child: Obx(
-                                  () => SvgPicture.asset(
-                                    trackController.namaSVG.value == ''
-                                        ? ''
-                                        : trackController.namaSVG.value,
-                                    width: width * 0.02,
-                                    height: width * 0.05,
-                                  ),
+                                  () => trackController.namaSVG.value == ''
+                                      ? SizedBox()
+                                      : SvgPicture.asset(
+                                          trackController.namaSVG.value,
+                                          width: width * 0.06,
+                                          height: width * 0.06,
+                                        ),
                                 ),
                               ),
                             ),
-                            Icon(
-                              Icons.arrow_drop_down,
-                              color: Color.fromARGB(255, 246, 142, 37),
-                            ),
+                            Icon(Icons.arrow_drop_down,
+                                color: Color(0xFF00C3D4)),
                           ],
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: height * 0.025,
-                  ),
+                  SizedBox(height: height * 0.025),
                   Center(
                     child: SizedBox(
                       width: width * 0.3,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(
-                            Color.fromARGB(255, 246, 142, 37),
-                          ),
+                          backgroundColor:
+                              WidgetStateProperty.all(Color(0xFF00C3D4)),
                           shape:
                               WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -323,6 +315,7 @@ class _DashboardState extends State<Dashboard> {
                               side: BorderSide(color: Colors.white),
                             ),
                           ),
+                          elevation: WidgetStateProperty.all(2),
                         ),
                         onPressed: () {
                           if (trackController.receipt.text.isEmpty) {
@@ -341,14 +334,13 @@ class _DashboardState extends State<Dashboard> {
                           "Cari",
                           style: GoogleFonts.roboto(
                             fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: height * 0.03,
-                  ),
+                  SizedBox(height: height * 0.03),
                   Container(
                     padding: EdgeInsets.all(width * 0.05),
                     decoration: BoxDecoration(
