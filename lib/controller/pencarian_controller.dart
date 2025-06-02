@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:paketku/helper/sql_helper.dart';
+import 'package:GoShipp/helper/sql_helper.dart';
 
 class PencarianController extends GetxController {
   final snackBar = SnackBar(

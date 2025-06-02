@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paketku/constant/constantVariabel.dart';
+import 'package:GoShipp/constant/constantVariabel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RatingWidget extends StatelessWidget {

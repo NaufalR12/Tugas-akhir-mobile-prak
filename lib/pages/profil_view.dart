@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controller/auth_controller.dart';
 import '../database/database_helper.dart';
 import 'login_view.dart';
-import 'package:paketku/constant/constantVariabel.dart';
+import 'package:GoShipp/constant/constantVariabel.dart';
 
 class ProfilView extends StatefulWidget {
   const ProfilView({super.key});

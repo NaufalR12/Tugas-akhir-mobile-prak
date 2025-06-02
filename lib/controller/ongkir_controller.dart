@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/io_client.dart';
 import 'package:get/get.dart';
-import 'package:paketku/models/ongkir.dart';
+import 'package:GoShipp/models/ongkir.dart';
 
 class OngkirController extends GetxController {
   RxString namaSVG = "".obs;

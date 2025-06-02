@@ -9,15 +9,15 @@ import 'package:http/io_client.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paketku/constant/constantVariabel.dart';
-import 'package:paketku/controller/ongkir_controller.dart';
-import 'package:paketku/models/api.dart';
-import 'package:paketku/models/dummy_data_ikon.dart';
-import 'package:paketku/models/kota.dart';
-import 'package:paketku/models/ongkir.dart';
-import 'package:paketku/pages/dashboard.dart';
-import 'package:paketku/pages/hasil_cek_ongkir.dart';
-import 'package:paketku/pages/pengaturan.dart';
+import 'package:GoShipp/constant/constantVariabel.dart';
+import 'package:GoShipp/controller/ongkir_controller.dart';
+import 'package:GoShipp/models/api.dart';
+import 'package:GoShipp/models/dummy_data_ikon.dart';
+import 'package:GoShipp/models/kota.dart';
+import 'package:GoShipp/models/ongkir.dart';
+import 'package:GoShipp/pages/dashboard.dart';
+import 'package:GoShipp/pages/hasil_cek_ongkir.dart';
+import 'package:GoShipp/pages/pengaturan.dart';
 
 class CekOngkir extends StatefulWidget {
   const CekOngkir({super.key});

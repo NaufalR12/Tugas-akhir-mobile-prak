@@ -5,12 +5,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paketku/pages/dashboard.dart';
+import 'package:GoShipp/pages/dashboard.dart';
 import 'controller/auth_controller.dart';
 import 'controller/theme_controller.dart';
 import 'pages/login_view.dart';
 import 'pages/onboarding_page.dart';
-import 'package:paketku/controller/riwayat_controller.dart';
+import 'package:GoShipp/controller/riwayat_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
