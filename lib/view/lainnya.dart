@@ -9,6 +9,9 @@ import 'package:paketku/view/dashboard.dart';
 import 'package:paketku/widget/lainnya/bagikan_widget.dart';
 import 'package:paketku/widget/lainnya/delete_widget.dart';
 import 'package:paketku/widget/lainnya/email_to_widget.dart';
+import '../controller/auth_controller.dart';
+import 'login_view.dart';
+import 'profil_view.dart';
 // import 'package:paketku/widget/lainnya/rating_widget.dart';
 
 class Lainnya extends StatefulWidget {
@@ -21,6 +24,7 @@ class Lainnya extends StatefulWidget {
 class _LainnyaState extends State<Lainnya> {
   @override
   Widget build(BuildContext context) {
+    final AuthController authController = Get.find<AuthController>();
     bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 223, 223, 223),
@@ -121,6 +125,19 @@ class _LainnyaState extends State<Lainnya> {
                 EmailtoWidget(
                   namaIcon: Icons.mail,
                   isiText: "Kontak Kami",
+                ),
+                ListTile(
+                  leading: Icon(Icons.person, color: Colors.blue),
+                  title: Text('Profil'),
+                  onTap: () => Get.to(() => ProfilView()),
+                ),
+                ListTile(
+                  leading: Icon(Icons.logout, color: Colors.red),
+                  title: Text('Logout'),
+                  onTap: () async {
+                    await authController.logout();
+                    Get.offAll(() => LoginView());
+                  },
                 ),
               ],
             ),
