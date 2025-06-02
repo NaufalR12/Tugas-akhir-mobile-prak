@@ -47,7 +47,8 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
       ),
       themeMode: ThemeMode.system,
-      home: OnboardingPage(),
+      home: Obx(() =>
+          authController.isLoggedIn.value ? Dashboard() : OnboardingPage()),
     );
   }
 }
