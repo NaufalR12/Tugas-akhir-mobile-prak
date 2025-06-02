@@ -28,12 +28,12 @@ class _PengaturanState extends State<Pengaturan> {
   Widget build(BuildContext context) {
     bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 223, 223, 223),
+      backgroundColor: Color(0xFFE0F6FF),
       resizeToAvoidBottomInset: true,
       floatingActionButton: Visibility(
         visible: !keyboardIsOpen,
         child: FloatingActionButton(
-          backgroundColor: Color.fromARGB(255, 55, 202, 236),
+          backgroundColor: Color(0xFF00C3D4),
           child: Icon(Icons.home),
           onPressed: () {
             Get.offAll(
@@ -52,61 +52,49 @@ class _PengaturanState extends State<Pengaturan> {
         children: [
           Container(
             padding: EdgeInsets.all(width * 0.07),
-            height: width * 0.57,
+            height: width * 0.8,
             width: width,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: new BorderRadius.only(
+              borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(width * 0.1),
                 bottomRight: Radius.circular(width * 0.1),
               ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: width * 0.2,
-                  height: width * 0.25,
-                  child: Image.asset('assets/icon/icon.png'),
-                ),
-                Text(
-                  'PaketKU',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.roboto(
-                    fontWeight: FontWeight.bold,
-                    fontSize: width * 0.06,
-                    color: Color.fromARGB(255, 246, 142, 37),
-                  ),
-                ),
-                Text(
-                  "Developer: Yoga Dev.",
-                  style: GoogleFonts.roboto(
-                    fontSize: height * 0.025,
-                    color: Color.fromARGB(255, 4, 120, 122),
-                    fontWeight: FontWeight.bold,
-                  ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
                 ),
               ],
             ),
-          ),
-          SizedBox(
-            height: width * 0.1,
-          ),
-          Container(
-            padding: EdgeInsets.only(
-              top: width * 0.05,
-              left: width * 0.07,
-              right: width * 0.07,
-              bottom: width * 0.05,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: width * 0.6,
+                  height: width * 0.6,
+                  child: Image.asset('assets/icon/icon.png'),
+                ),
+                SizedBox(height: width * 0.05),
+              ],
             ),
-            height: width * 0.7,
-            width: width,
+          ),
+          SizedBox(height: width * 0.1),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: width * 0.05),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: new BorderRadius.only(
-                topLeft: Radius.circular(width * 0.1),
-                topRight: Radius.circular(width * 0.1),
-              ),
+              borderRadius: BorderRadius.circular(width * 0.05),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 1,
+                  blurRadius: 3,
+                  offset: Offset(0, 2),
+                ),
+              ],
             ),
             child: Column(
               children: [
@@ -114,25 +102,32 @@ class _PengaturanState extends State<Pengaturan> {
                   decoration: BoxDecoration(
                     border: Border(
                       bottom: BorderSide(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withOpacity(0.1),
                         width: 1,
                       ),
                     ),
                   ),
                   child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: width * 0.02),
-                    leading: Icon(
-                      Icons.delete_forever_outlined,
-                      color: Colors.red,
-                      size: width * 0.06,
+                    contentPadding: EdgeInsets.symmetric(
+                        horizontal: width * 0.05, vertical: width * 0.02),
+                    leading: Container(
+                      padding: EdgeInsets.all(width * 0.02),
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(width * 0.02),
+                      ),
+                      child: Icon(
+                        Icons.delete_forever_outlined,
+                        color: Colors.red,
+                        size: width * 0.06,
+                      ),
                     ),
                     title: Text(
                       'Bersihkan History',
                       style: GoogleFonts.roboto(
                         fontSize: width * 0.04,
                         fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 4, 120, 122),
+                        color: Color(0xFF00C3D4),
                       ),
                     ),
                     onTap: () {
@@ -148,7 +143,6 @@ class _PengaturanState extends State<Pengaturan> {
                             ),
                             TextButton(
                               onPressed: () {
-                                // Tambahkan fungsi untuk menghapus history
                                 Get.back();
                               },
                               child: Text('Hapus',
@@ -164,22 +158,32 @@ class _PengaturanState extends State<Pengaturan> {
                   decoration: BoxDecoration(
                     border: Border(
                       bottom: BorderSide(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withOpacity(0.1),
                         width: 1,
                       ),
                     ),
                   ),
                   child: Obx(() => ListTile(
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: width * 0.02),
-                        leading: Icon(
-                          themeController.isDarkMode
-                              ? Icons.light_mode
-                              : Icons.dark_mode,
-                          color: themeController.isDarkMode
-                              ? Colors.amber
-                              : Colors.grey,
-                          size: width * 0.06,
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: width * 0.05, vertical: width * 0.02),
+                        leading: Container(
+                          padding: EdgeInsets.all(width * 0.02),
+                          decoration: BoxDecoration(
+                            color: (themeController.isDarkMode
+                                    ? Colors.amber
+                                    : Colors.grey)
+                                .withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(width * 0.02),
+                          ),
+                          child: Icon(
+                            themeController.isDarkMode
+                                ? Icons.light_mode
+                                : Icons.dark_mode,
+                            color: themeController.isDarkMode
+                                ? Colors.amber
+                                : Colors.grey,
+                            size: width * 0.06,
+                          ),
                         ),
                         title: Text(
                           themeController.isDarkMode
@@ -188,7 +192,7 @@ class _PengaturanState extends State<Pengaturan> {
                           style: GoogleFonts.roboto(
                             fontSize: width * 0.04,
                             fontWeight: FontWeight.w500,
-                            color: Color.fromARGB(255, 4, 120, 122),
+                            color: Color(0xFF00C3D4),
                           ),
                         ),
                         onTap: () => themeController.toggleTheme(),
@@ -198,53 +202,59 @@ class _PengaturanState extends State<Pengaturan> {
                   decoration: BoxDecoration(
                     border: Border(
                       bottom: BorderSide(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withOpacity(0.1),
                         width: 1,
                       ),
                     ),
                   ),
                   child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: width * 0.02),
-                    leading: Icon(
-                      Icons.person,
-                      color: Colors.blue,
-                      size: width * 0.06,
+                    contentPadding: EdgeInsets.symmetric(
+                        horizontal: width * 0.05, vertical: width * 0.02),
+                    leading: Container(
+                      padding: EdgeInsets.all(width * 0.02),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(width * 0.02),
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.blue,
+                        size: width * 0.06,
+                      ),
                     ),
                     title: Text(
                       'Profil',
                       style: GoogleFonts.roboto(
                         fontSize: width * 0.04,
                         fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 4, 120, 122),
+                        color: Color(0xFF00C3D4),
                       ),
                     ),
                     onTap: () => Get.to(() => ProfilView()),
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.grey.withOpacity(0.2),
-                        width: 1,
-                      ),
-                    ),
-                  ),
                   child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: width * 0.02),
-                    leading: Icon(
-                      Icons.logout,
-                      color: Colors.red,
-                      size: width * 0.06,
+                    contentPadding: EdgeInsets.symmetric(
+                        horizontal: width * 0.05, vertical: width * 0.02),
+                    leading: Container(
+                      padding: EdgeInsets.all(width * 0.02),
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(width * 0.02),
+                      ),
+                      child: Icon(
+                        Icons.logout,
+                        color: Colors.red,
+                        size: width * 0.06,
+                      ),
                     ),
                     title: Text(
                       'Logout',
                       style: GoogleFonts.roboto(
                         fontSize: width * 0.04,
                         fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 4, 120, 122),
+                        color: Color(0xFF00C3D4),
                       ),
                     ),
                     onTap: () async {
@@ -279,6 +289,8 @@ class _PengaturanState extends State<Pengaturan> {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 5,
+        color: Colors.white,
+        elevation: 8,
         child: SizedBox(
           height: 60,
           child: Row(
@@ -300,10 +312,13 @@ class _PengaturanState extends State<Pengaturan> {
                     children: <Widget>[
                       Icon(
                         Icons.price_change_outlined,
+                        color: Colors.grey,
                       ),
                       Text(
                         'Cek Ongkir',
-                        style: TextStyle(),
+                        style: GoogleFonts.roboto(
+                          color: Colors.grey,
+                        ),
                       ),
                     ],
                   ),
@@ -317,7 +332,7 @@ class _PengaturanState extends State<Pengaturan> {
                   decoration: BoxDecoration(
                     border: Border(
                       top: BorderSide(
-                        color: Color.fromARGB(255, 246, 142, 37),
+                        color: Color(0xFF00C3D4),
                         width: 3,
                       ),
                     ),
@@ -327,12 +342,12 @@ class _PengaturanState extends State<Pengaturan> {
                     children: <Widget>[
                       Icon(
                         Icons.settings,
-                        color: Color.fromARGB(255, 246, 142, 37),
+                        color: Color(0xFF00C3D4),
                       ),
                       Text(
                         'Pengaturan',
                         style: GoogleFonts.roboto(
-                          color: Color.fromARGB(255, 246, 142, 37),
+                          color: Color(0xFF00C3D4),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
