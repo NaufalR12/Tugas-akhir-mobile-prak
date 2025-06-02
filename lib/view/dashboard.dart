@@ -12,7 +12,7 @@ import 'package:paketku/controller/tracking_controller.dart';
 import 'package:paketku/helper/sql_helper.dart';
 import 'package:paketku/model/dummy_data_ikon.dart';
 import 'package:paketku/view/cekOngkir.dart';
-import 'package:paketku/view/lainnya.dart';
+import 'package:paketku/view/pengaturan.dart';
 import 'package:paketku/view/riwayatTracking.dart';
 import 'package:paketku/view/tracking.dart';
 
@@ -774,7 +774,7 @@ class _DashboardState extends State<Dashboard> {
                 minWidth: 40,
                 onPressed: () {
                   Get.offAll(
-                    () => Lainnya(),
+                    () => Pengaturan(),
                     transition: Transition.fadeIn,
                     duration: Duration(seconds: 1),
                   );
@@ -788,7 +788,7 @@ class _DashboardState extends State<Dashboard> {
                         Icons.dehaze_sharp,
                       ),
                       Text(
-                        'Lainnya',
+                        'Pengaturan',
                         style: GoogleFonts.roboto(),
                       ),
                     ],

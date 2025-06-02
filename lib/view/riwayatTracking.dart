@@ -6,7 +6,7 @@ import 'package:paketku/constant/constantVariabel.dart';
 import 'package:paketku/helper/sql_helper.dart';
 import 'package:paketku/view/cekOngkir.dart';
 import 'package:paketku/view/dashboard.dart';
-import 'package:paketku/view/lainnya.dart';
+import 'package:paketku/view/pengaturan.dart';
 import 'package:paketku/view/tracking.dart';
 
 List<Map<String, dynamic>> _journals = [];
@@ -315,7 +315,7 @@ class _RiwayatTrackingState extends State<RiwayatTracking> {
                   minWidth: 40,
                   onPressed: () {
                     Get.offAll(
-                      () => Lainnya(),
+                      () => Pengaturan(),
                       transition: Transition.fadeIn,
                       duration: Duration(seconds: 1),
                     );
@@ -329,7 +329,7 @@ class _RiwayatTrackingState extends State<RiwayatTracking> {
                           Icons.dehaze_sharp,
                         ),
                         Text(
-                          'Lainnya',
+                          'Pengaturan',
                           style: GoogleFonts.roboto(),
                         ),
                       ],

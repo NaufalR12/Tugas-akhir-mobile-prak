@@ -9,7 +9,7 @@ import 'package:paketku/model/api.dart';
 import 'package:paketku/model/ongkir.dart';
 import 'package:paketku/view/cekOngkir.dart';
 import 'package:paketku/view/dashboard.dart';
-import 'package:paketku/view/lainnya.dart';
+import 'package:paketku/view/pengaturan.dart';
 
 class HasilCekOngkir extends StatefulWidget {
   String kotaAsal;
@@ -410,7 +410,7 @@ class _HasilCekOngkirState extends State<HasilCekOngkir> {
                   minWidth: 40,
                   onPressed: () {
                     Get.offAll(
-                      () => Lainnya(),
+                      () => Pengaturan(),
                       transition: Transition.fadeIn,
                       duration: Duration(seconds: 1),
                     );
@@ -422,7 +422,7 @@ class _HasilCekOngkirState extends State<HasilCekOngkir> {
                         Icons.dehaze_sharp,
                       ),
                       Text(
-                        'Lainnya',
+                        'Pengaturan',
                         style: TextStyle(),
                       ),
                     ],

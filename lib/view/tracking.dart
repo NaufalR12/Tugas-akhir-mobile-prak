@@ -9,7 +9,7 @@ import 'package:paketku/controller/tracking_controller.dart';
 import 'package:paketku/model/receipt.dart';
 import 'package:paketku/view/cekOngkir.dart';
 import 'package:paketku/view/dashboard.dart';
-import 'package:paketku/view/lainnya.dart';
+import 'package:paketku/view/pengaturan.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class Tracking2 extends StatefulWidget {
@@ -478,7 +478,7 @@ class _Tracking2State extends State<Tracking2> {
                   minWidth: 40,
                   onPressed: () {
                     Get.offAll(
-                      () => Lainnya(),
+                      () => Pengaturan(),
                       transition: Transition.fadeIn,
                       duration: Duration(seconds: 1),
                     );
@@ -492,7 +492,7 @@ class _Tracking2State extends State<Tracking2> {
                           Icons.dehaze_sharp,
                         ),
                         Text(
-                          'Lainnya',
+                          'Pengaturan',
                           style: GoogleFonts.roboto(),
                         ),
                       ],
