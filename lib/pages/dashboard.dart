@@ -15,6 +15,7 @@ import 'package:GoShipp/pages/pengaturan.dart';
 import 'package:GoShipp/pages/riwayat_view.dart';
 import 'package:GoShipp/pages/tracking.dart';
 import 'package:GoShipp/widget/custom_bottom_bar.dart';
+import '../main.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -40,10 +41,10 @@ class _DashboardState extends State<Dashboard> {
       "Silahkan isi semua kolom terlebih dahulu",
       icon: Icon(Icons.block_outlined, color: Colors.red),
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Color.fromARGB(255, 246, 142, 37).withAlpha(128),
+      backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
       borderRadius: 20,
       margin: EdgeInsets.all(15),
-      colorText: Colors.black,
+      colorText: Theme.of(context).textTheme.bodyLarge?.color ?? Colors.black,
       duration: Duration(seconds: 4),
       isDismissible: true,
       dismissDirection: DismissDirection.horizontal,
@@ -97,7 +98,7 @@ class _DashboardState extends State<Dashboard> {
     bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
 
     return Scaffold(
-      backgroundColor: Color(0xFFE0F6FF),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       resizeToAvoidBottomInset: false,
       body: Stack(
         alignment: Alignment.bottomCenter,
@@ -112,7 +113,7 @@ class _DashboardState extends State<Dashboard> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Color(0xFFE0F6FF).withOpacity(0.5),
+              color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.5),
             ),
             child: Container(
               padding: EdgeInsets.only(
@@ -125,7 +126,7 @@ class _DashboardState extends State<Dashboard> {
                       style: GoogleFonts.roboto(
                         fontSize: height * 0.045,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF00C3D4),
+                        color: Theme.of(context).primaryColor,
                         wordSpacing: 5,
                         letterSpacing: 2,
                       ),
@@ -137,7 +138,7 @@ class _DashboardState extends State<Dashboard> {
                       "Lokasi Anda",
                       style: GoogleFonts.roboto(
                         fontSize: height * 0.02,
-                        color: Color(0xFF00C3D4),
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),
@@ -149,7 +150,7 @@ class _DashboardState extends State<Dashboard> {
                         style: GoogleFonts.roboto(
                           fontSize: height * 0.02,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF00C3D4),
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ),
@@ -158,7 +159,7 @@ class _DashboardState extends State<Dashboard> {
                     child: Text(
                       "Masukkan No. Resi Anda",
                       style: GoogleFonts.roboto(
-                        color: Color(0xFF00C3D4),
+                        color: Theme.of(context).primaryColor,
                         fontSize: height * 0.02,
                         fontWeight: FontWeight.bold,
                       ),
@@ -169,15 +170,17 @@ class _DashboardState extends State<Dashboard> {
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Color(0xFF00C3D4),
+                          color: Theme.of(context).primaryColor,
                         ),
                         borderRadius: BorderRadius.all(
                           Radius.circular(width * 0.05),
                         ),
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         boxShadow: [
                           BoxShadow(
-                            color: Color(0xFF00C3D4).withOpacity(0.08),
+                            color: Theme.of(context)
+                                .primaryColor
+                                .withOpacity(0.08),
                             blurRadius: 8,
                             offset: Offset(0, 2),
                           ),
@@ -188,31 +191,36 @@ class _DashboardState extends State<Dashboard> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: width * 0.05),
-                          Icon(Icons.search, color: Color(0xFF00C3D4)),
+                          Icon(Icons.search,
+                              color: Theme.of(context).primaryColor),
                           SizedBox(
                             width: width * 0.6,
                             height: height * 0.05,
                             child: TextField(
                               textAlignVertical: TextAlignVertical.bottom,
                               style: GoogleFonts.roboto(
-                                color: Color(0xFF00C3D4),
+                                color: Theme.of(context).primaryColor,
                               ),
                               controller: trackController.receipt,
                               textAlign: TextAlign.start,
                               decoration: InputDecoration(
                                 hintText: "Masukkan nomor resi disini",
                                 hintStyle: TextStyle(
-                                    color: Color(0xFF00C3D4).withOpacity(0.5)),
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.5)),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Colors.white.withAlpha(128),
+                                    color: Theme.of(context)
+                                        .cardColor
+                                        .withAlpha(128),
                                   ),
                                   borderRadius:
                                       BorderRadius.circular(width * 0.1),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0xFF00C3D4),
+                                    color: Theme.of(context).primaryColor,
                                   ),
                                   borderRadius:
                                       BorderRadius.circular(width * 0.1),
@@ -229,7 +237,7 @@ class _DashboardState extends State<Dashboard> {
                     child: Text(
                       "Pilih Jasa Kirim",
                       style: GoogleFonts.roboto(
-                        color: Color(0xFF00C3D4),
+                        color: Theme.of(context).primaryColor,
                         fontSize: height * 0.02,
                         fontWeight: FontWeight.bold,
                       ),
@@ -240,15 +248,17 @@ class _DashboardState extends State<Dashboard> {
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Color(0xFF00C3D4),
+                          color: Theme.of(context).primaryColor,
                         ),
                         borderRadius: BorderRadius.all(
                           Radius.circular(width * 0.05),
                         ),
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         boxShadow: [
                           BoxShadow(
-                            color: Color(0xFF00C3D4).withOpacity(0.08),
+                            color: Theme.of(context)
+                                .primaryColor
+                                .withOpacity(0.08),
                             blurRadius: 8,
                             offset: Offset(0, 2),
                           ),
@@ -262,7 +272,8 @@ class _DashboardState extends State<Dashboard> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             SizedBox(width: width * 0.05),
-                            Icon(Icons.search, color: Color(0xFF00C3D4)),
+                            Icon(Icons.search,
+                                color: Theme.of(context).primaryColor),
                             SizedBox(
                               width: width * 0.35,
                               child: Center(
@@ -278,7 +289,7 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             ),
                             Icon(Icons.arrow_drop_down,
-                                color: Color(0xFF00C3D4)),
+                                color: Theme.of(context).primaryColor),
                           ],
                         ),
                       ),
@@ -290,13 +301,14 @@ class _DashboardState extends State<Dashboard> {
                       width: width * 0.3,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all(Color(0xFF00C3D4)),
+                          backgroundColor: WidgetStateProperty.all(
+                              Theme.of(context).primaryColor),
                           shape:
                               WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: Colors.white),
+                              side: BorderSide(
+                                  color: Theme.of(context).cardColor),
                             ),
                           ),
                           elevation: WidgetStateProperty.all(2),
@@ -318,7 +330,7 @@ class _DashboardState extends State<Dashboard> {
                           "Cari",
                           style: GoogleFonts.roboto(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Theme.of(context).cardColor,
                           ),
                         ),
                       ),
@@ -330,12 +342,12 @@ class _DashboardState extends State<Dashboard> {
                     decoration: BoxDecoration(
                       border: Border.all(
                         width: 1,
-                        color: Color.fromARGB(255, 42, 172, 213),
+                        color: Theme.of(context).primaryColor.withOpacity(0.2),
                       ),
                       borderRadius: new BorderRadius.all(
                         Radius.circular(width * 0.05),
                       ),
-                      color: Colors.white.withAlpha(179),
+                      color: Theme.of(context).cardColor.withOpacity(0.9),
                     ),
                     width: width,
                     height: width * 0.8,
@@ -349,13 +361,19 @@ class _DashboardState extends State<Dashboard> {
                                 border: Border(
                                   bottom: BorderSide(
                                       width: 2.0,
-                                      color: Colors.lightBlue.shade900),
+                                      color: Theme.of(context)
+                                          .primaryColor
+                                          .withOpacity(0.8)),
                                 ),
                               ),
                               child: Text(
                                 "Riwayat Pelacakan",
                                 style: GoogleFonts.roboto(
-                                  color: Color.fromARGB(255, 5, 78, 94),
+                                  color: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.color ??
+                                      Colors.black,
                                   fontSize: height * 0.02,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -368,7 +386,9 @@ class _DashboardState extends State<Dashboard> {
                               child: Text(
                                 "Lihat Semua >",
                                 style: GoogleFonts.roboto(
-                                  color: Color.fromARGB(255, 246, 142, 37),
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.8),
                                   fontSize: height * 0.015,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -419,8 +439,12 @@ class _DashboardState extends State<Dashboard> {
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
-                                                color:
-                                                    Colors.grey.withAlpha(128),
+                                                color: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyLarge
+                                                        ?.color
+                                                        ?.withAlpha(128) ??
+                                                    Colors.black.withAlpha(128),
                                                 spreadRadius: 2,
                                                 blurRadius: 3,
                                                 offset: Offset(2, 4),
@@ -433,9 +457,9 @@ class _DashboardState extends State<Dashboard> {
                                                   Radius.circular(width * 0.04),
                                             ),
                                             border: Border.all(
-                                                color: Color.fromARGB(
-                                                    255, 255, 255, 255)),
-                                            color: Colors.white,
+                                                color: Theme.of(context)
+                                                    .cardColor),
+                                            color: Theme.of(context).cardColor,
                                           ),
                                           child: Row(
                                             mainAxisAlignment:
@@ -445,8 +469,11 @@ class _DashboardState extends State<Dashboard> {
                                               Text(
                                                 "${index + 1}",
                                                 style: GoogleFonts.roboto(
-                                                  color: Color.fromARGB(
-                                                      255, 5, 78, 94),
+                                                  color: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge
+                                                          ?.color ??
+                                                      Colors.black,
                                                   fontSize: height * 0.018,
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -463,8 +490,14 @@ class _DashboardState extends State<Dashboard> {
                                                       Icon(
                                                         Icons.copy,
                                                         size: width * 0.03,
-                                                        color: Colors.black
-                                                            .withAlpha(128),
+                                                        color: Theme.of(context)
+                                                                .textTheme
+                                                                .bodyLarge
+                                                                ?.color
+                                                                ?.withAlpha(
+                                                                    128) ??
+                                                            Colors.black
+                                                                .withAlpha(128),
                                                       ),
                                                       SizedBox(
                                                           width: width * 0.008),
@@ -476,12 +509,11 @@ class _DashboardState extends State<Dashboard> {
                                                               .ellipsis,
                                                           style: GoogleFonts
                                                               .roboto(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    246,
-                                                                    142,
-                                                                    37),
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColor
+                                                                .withOpacity(
+                                                                    0.8),
                                                             fontSize:
                                                                 height * 0.018,
                                                             fontWeight:
@@ -498,8 +530,11 @@ class _DashboardState extends State<Dashboard> {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: GoogleFonts.roboto(
-                                                        color: Colors.black
-                                                            .withAlpha(128),
+                                                        color: Theme.of(context)
+                                                                .textTheme
+                                                                .bodyLarge
+                                                                ?.color ??
+                                                            Colors.black,
                                                         fontSize:
                                                             height * 0.018,
                                                         fontWeight:
@@ -525,8 +560,9 @@ class _DashboardState extends State<Dashboard> {
                                                 bottomRight: Radius.circular(
                                                     width * 0.04),
                                               ),
-                                              color: Color.fromARGB(
-                                                  255, 246, 142, 37),
+                                              color: Theme.of(context)
+                                                  .primaryColor
+                                                  .withOpacity(0.2),
                                             ),
                                             child: IconButton(
                                               onPressed: () {
@@ -534,7 +570,8 @@ class _DashboardState extends State<Dashboard> {
                                               },
                                               icon: Icon(
                                                 Icons.delete,
-                                                color: Colors.white,
+                                                color:
+                                                    Theme.of(context).cardColor,
                                               ),
                                             ),
                                           ),
@@ -574,14 +611,19 @@ class _DashboardState extends State<Dashboard> {
               height: _offset.dy,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
                 ),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.grey.withAlpha(128),
+                      color: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.color
+                              ?.withAlpha(128) ??
+                          Colors.black.withAlpha(128),
                       spreadRadius: 5,
                       blurRadius: 10)
                 ],
@@ -631,13 +673,19 @@ class _DashboardState extends State<Dashboard> {
                                   border: Border.all(
                                     width: selectedCard == index ? 2 : 1,
                                     color: selectedCard == index
-                                        ? Color.fromARGB(255, 4, 210, 35)
-                                        : Colors.black,
+                                        ? Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.2)
+                                        : Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge
+                                                ?.color ??
+                                            Colors.black,
                                   ),
                                   borderRadius: new BorderRadius.all(
                                     Radius.circular(width * 0.05),
                                   ),
-                                  color: Colors.white,
+                                  color: Theme.of(context).cardColor,
                                 ),
                                 height: width * 0.2,
                                 width: width * 0.2,
@@ -653,7 +701,9 @@ class _DashboardState extends State<Dashboard> {
                                     svg.title,
                                     style: GoogleFonts.roboto(
                                       fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 246, 142, 37),
+                                      color: Theme.of(context)
+                                          .primaryColor
+                                          .withOpacity(0.8),
                                       wordSpacing: 5,
                                       letterSpacing: 2,
                                     ),

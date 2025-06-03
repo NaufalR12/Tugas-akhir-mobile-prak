@@ -12,6 +12,21 @@ import 'pages/login_view.dart';
 import 'pages/onboarding_page.dart';
 import 'package:GoShipp/controller/riwayat_controller.dart';
 
+// Variabel warna untuk mode terang (light) dan gelap (dark) agar konsisten di seluruh halaman.
+const Color lightPrimaryColor = Color(0xFF00C3D4);
+const Color lightScaffoldColor = Color(0xFFE0F6FF);
+const Color lightCardColor = Colors.white;
+const Color lightAppBarColor = Color(0xFF00C3D4);
+const Color lightFABColor = Color(0xFF00C3D4);
+const Color lightTextColor = Colors.black;
+
+const Color darkPrimaryColor = Color(0xFF00C3D4);
+const Color darkScaffoldColor = Color(0xFF121212);
+const Color darkCardColor = Color(0xFF23272A);
+const Color darkAppBarColor = Color(0xFF1F1F1F);
+const Color darkFABColor = Color(0xFF23272A);
+const Color darkTextColor = Colors.white;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final AuthController authController = Get.put(AuthController());
@@ -26,30 +41,43 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'PaketKU',
-      theme: ThemeData.light().copyWith(
-        primaryColor: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.blue,
-          foregroundColor: Colors.white,
-        ),
-        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
-      ),
-      darkTheme: ThemeData.dark().copyWith(
-        primaryColor: Colors.blue,
-        scaffoldBackgroundColor: Color(0xFF121212),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Color(0xFF1F1F1F),
-          foregroundColor: Colors.white,
-        ),
-        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
-      ),
-      themeMode: ThemeMode.system,
-      home: Obx(() =>
-          authController.isLoggedIn.value ? Dashboard() : OnboardingPage()),
-    );
+    return Obx(() => GetMaterialApp(
+          title: 'PaketKU',
+          theme: ThemeData.light().copyWith(
+            primaryColor: lightPrimaryColor,
+            scaffoldBackgroundColor: lightScaffoldColor,
+            appBarTheme: AppBarTheme(
+              backgroundColor: lightAppBarColor,
+              foregroundColor: Colors.white,
+            ),
+            cardColor: lightCardColor,
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              backgroundColor: lightFABColor,
+              foregroundColor: Colors.white,
+            ),
+            textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
+                .apply(bodyColor: lightTextColor, displayColor: lightTextColor),
+          ),
+          darkTheme: ThemeData.dark().copyWith(
+            primaryColor: darkPrimaryColor,
+            scaffoldBackgroundColor: darkScaffoldColor,
+            appBarTheme: AppBarTheme(
+              backgroundColor: darkAppBarColor,
+              foregroundColor: Colors.white,
+            ),
+            cardColor: darkCardColor,
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              backgroundColor: darkFABColor,
+              foregroundColor: Colors.white,
+            ),
+            textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
+                .apply(bodyColor: darkTextColor, displayColor: darkTextColor),
+          ),
+          themeMode:
+              themeController.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          home: Obx(() =>
+              authController.isLoggedIn.value ? Dashboard() : OnboardingPage()),
+        ));
   }
 }
 

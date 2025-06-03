@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../controller/riwayat_controller.dart';
 import '../controller/auth_controller.dart';
 import '../models/riwayat.dart';
+import '../main.dart';
 
 class RiwayatView extends StatelessWidget {
   final RiwayatController riwayatController = Get.find<RiwayatController>();
@@ -25,21 +26,22 @@ class RiwayatView extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Color(0xFFE0F6FF),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 1,
         title: Text(
           'Riwayat Pelacakan',
           style: TextStyle(
-            color: Color(0xFF00C3D4),
+            color: Theme.of(context).textTheme.bodyLarge?.color,
             fontWeight: FontWeight.bold,
           ),
         ),
-        iconTheme: IconThemeData(color: Color(0xFF00C3D4)),
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         actions: [
           IconButton(
-            icon: Icon(Icons.delete_sweep, color: Color(0xFF00C3D4)),
+            icon:
+                Icon(Icons.delete_sweep, color: Theme.of(context).primaryColor),
             onPressed: () {
               Get.dialog(
                 AlertDialog(
@@ -71,7 +73,8 @@ class RiwayatView extends StatelessWidget {
             child: Text(
               'Belum ada riwayat pelacakan',
               style: TextStyle(
-                  color: Color(0xFF00C3D4), fontWeight: FontWeight.bold),
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
+                  fontWeight: FontWeight.bold),
             ),
           );
         }
@@ -89,7 +92,9 @@ class RiwayatView extends StatelessWidget {
                 ),
                 alignment: Alignment.centerRight,
                 padding: EdgeInsets.only(right: 24),
-                child: Icon(Icons.delete, color: Colors.white, size: 28),
+                child: Icon(Icons.delete,
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                    size: 28),
               ),
               direction: DismissDirection.endToStart,
               onDismissed: (direction) {
@@ -101,18 +106,20 @@ class RiwayatView extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 child: ListTile(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                   leading: CircleAvatar(
-                    backgroundColor: Color(0xFF00C3D4).withOpacity(0.15),
-                    child: Icon(Icons.local_shipping, color: Color(0xFF00C3D4)),
+                    backgroundColor:
+                        Theme.of(context).primaryColor.withOpacity(0.15),
+                    child: Icon(Icons.local_shipping,
+                        color: Theme.of(context).primaryColor),
                   ),
                   title: Text(
                     'No. Resi: ${riwayat.noResi}',
                     style: TextStyle(
-                      color: Color(0xFF00C3D4),
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -125,8 +132,13 @@ class RiwayatView extends StatelessWidget {
                       Text('Status: ${riwayat.status}',
                           style: TextStyle(fontWeight: FontWeight.w500)),
                       Text('Tanggal: ${_formatDate(riwayat.tanggal)}',
-                          style:
-                              TextStyle(fontSize: 12, color: Colors.black54)),
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color ??
+                                  Colors.black)),
                     ],
                   ),
                   isThreeLine: true,

@@ -17,6 +17,7 @@ import 'package:GoShipp/pages/dashboard.dart';
 import 'package:GoShipp/pages/hasil_cek_ongkir.dart';
 import 'package:GoShipp/pages/pengaturan.dart';
 import 'package:GoShipp/widget/custom_bottom_bar.dart';
+import '../main.dart';
 
 class CekOngkir extends StatefulWidget {
   const CekOngkir({super.key});
@@ -55,7 +56,7 @@ class _CekOngkirState extends State<CekOngkir> {
         }
       },
       child: Scaffold(
-        backgroundColor: Color(0xFFE0F6FF),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         resizeToAvoidBottomInset: true,
         body: Stack(
           alignment: Alignment.bottomCenter,
@@ -68,7 +69,7 @@ class _CekOngkirState extends State<CekOngkir> {
                 width: 200,
                 height: 200,
                 decoration: BoxDecoration(
-                  color: Color(0xFFB6E5F8),
+                  color: Theme.of(context).primaryColor.withOpacity(0.2),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -83,7 +84,8 @@ class _CekOngkirState extends State<CekOngkir> {
                     style: GoogleFonts.roboto(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF222222),
+                      color: Theme.of(context).textTheme.bodyLarge?.color ??
+                          Colors.black,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -94,7 +96,8 @@ class _CekOngkirState extends State<CekOngkir> {
                     'Lebih Mudah Bersama GoShipp',
                     style: GoogleFonts.roboto(
                       fontSize: 14,
-                      color: Color(0xFF888888),
+                      color: Theme.of(context).textTheme.bodyMedium?.color ??
+                          Colors.grey,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -103,7 +106,7 @@ class _CekOngkirState extends State<CekOngkir> {
                 Container(
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -120,11 +123,15 @@ class _CekOngkirState extends State<CekOngkir> {
                       Text('Kota Asal',
                           style: GoogleFonts.roboto(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF222222))),
+                              color: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.color ??
+                                  Colors.black)),
                       SizedBox(height: 8),
                       Container(
                         decoration: BoxDecoration(
-                          color: Color(0xFFF5F5F5),
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: DropdownSearch<Kota>(
@@ -166,14 +173,18 @@ class _CekOngkirState extends State<CekOngkir> {
                       Text('Total Berat Paket',
                           style: GoogleFonts.roboto(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF222222))),
+                              color: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.color ??
+                                  Colors.black)),
                       SizedBox(height: 8),
                       Row(
                         children: [
                           Expanded(
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Color(0xFFF5F5F5),
+                                color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: TextField(
@@ -194,7 +205,11 @@ class _CekOngkirState extends State<CekOngkir> {
                           Text('gr',
                               style: GoogleFonts.roboto(
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF222222))),
+                                  color: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.color ??
+                                      Colors.black)),
                         ],
                       ),
                       SizedBox(height: 16),
@@ -202,11 +217,15 @@ class _CekOngkirState extends State<CekOngkir> {
                       Text('Kota Tujuan',
                           style: GoogleFonts.roboto(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF222222))),
+                              color: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.color ??
+                                  Colors.black)),
                       SizedBox(height: 8),
                       Container(
                         decoration: BoxDecoration(
-                          color: Color(0xFFF5F5F5),
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: DropdownSearch<Kota>(
@@ -248,11 +267,15 @@ class _CekOngkirState extends State<CekOngkir> {
                       Text('Jasa Kirim',
                           style: GoogleFonts.roboto(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF222222))),
+                              color: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.color ??
+                                  Colors.black)),
                       SizedBox(height: 8),
                       Container(
                         decoration: BoxDecoration(
-                          color: Color(0xFFF5F5F5),
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: GestureDetector(
@@ -271,15 +294,27 @@ class _CekOngkirState extends State<CekOngkir> {
                                           color:
                                               controllerOngkir.namaJasa.value ==
                                                       ''
-                                                  ? Color(0xFF888888)
-                                                  : Color(0xFF222222),
+                                                  ? Theme.of(context)
+                                                          .textTheme
+                                                          .bodyMedium
+                                                          ?.color ??
+                                                      Colors.grey
+                                                  : Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge
+                                                          ?.color ??
+                                                      Colors.black,
                                           fontWeight: FontWeight.normal,
                                         ),
                                       )),
                                 ),
                               ),
                               Icon(Icons.arrow_drop_down,
-                                  color: Color(0xFF888888)),
+                                  color: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.color ??
+                                      Colors.grey),
                             ],
                           ),
                         ),
@@ -290,7 +325,9 @@ class _CekOngkirState extends State<CekOngkir> {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
+                            backgroundColor:
+                                Theme.of(context).textTheme.bodyLarge?.color ??
+                                    Colors.black,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),
@@ -305,13 +342,18 @@ class _CekOngkirState extends State<CekOngkir> {
                                 "Pencarian Anda tidak ditemukan",
                                 "Silahkan isi semua kolom terlebih dahulu",
                                 icon: Icon(Icons.block_outlined,
-                                    color: Colors.red),
+                                    color: Theme.of(context).primaryColor),
                                 snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor:
-                                    Color(0xFF00C3D4).withOpacity(0.1),
+                                backgroundColor: Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.1),
                                 borderRadius: 20,
                                 margin: EdgeInsets.all(15),
-                                colorText: Colors.black,
+                                colorText: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.color ??
+                                    Colors.black,
                                 duration: Duration(seconds: 4),
                                 isDismissible: true,
                                 dismissDirection: DismissDirection.horizontal,
@@ -368,14 +410,15 @@ class _CekOngkirState extends State<CekOngkir> {
                 height: _offset.dy,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
                   ),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.grey.withAlpha(128),
+                        color: Theme.of(context).textTheme.bodyMedium?.color ??
+                            Colors.grey.withAlpha(128),
                         spreadRadius: 5,
                         blurRadius: 10)
                   ],
@@ -424,13 +467,17 @@ class _CekOngkirState extends State<CekOngkir> {
                                     border: Border.all(
                                       width: selectedCard == index ? 3 : 1,
                                       color: selectedCard == index
-                                          ? Color.fromARGB(255, 4, 210, 35)
-                                          : Colors.black,
+                                          ? Theme.of(context).primaryColor
+                                          : Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color ??
+                                              Colors.black,
                                     ),
                                     borderRadius: new BorderRadius.all(
                                       Radius.circular(width * 0.05),
                                     ),
-                                    color: Colors.white,
+                                    color: Theme.of(context).cardColor,
                                   ),
                                   height: width * 0.2,
                                   width: width * 0.2,
@@ -446,8 +493,7 @@ class _CekOngkirState extends State<CekOngkir> {
                                       svg.title,
                                       style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.bold,
-                                        color:
-                                            Color.fromARGB(255, 246, 142, 37),
+                                        color: Theme.of(context).primaryColor,
                                         wordSpacing: 5,
                                         letterSpacing: 2,
                                       ),

@@ -10,6 +10,7 @@ import 'login_view.dart';
 import 'profil_view.dart';
 import 'package:GoShipp/controller/theme_controller.dart';
 import 'package:GoShipp/widget/custom_bottom_bar.dart';
+import '../main.dart';
 
 class Pengaturan extends StatefulWidget {
   const Pengaturan({super.key});
@@ -26,7 +27,7 @@ class _PengaturanState extends State<Pengaturan> {
   Widget build(BuildContext context) {
     bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-      backgroundColor: Color(0xFFE0F6FF),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         toolbarHeight: 0.0,
@@ -38,7 +39,7 @@ class _PengaturanState extends State<Pengaturan> {
             height: width * 0.8,
             width: width,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(width * 0.1),
                 bottomRight: Radius.circular(width * 0.1),
@@ -68,7 +69,7 @@ class _PengaturanState extends State<Pengaturan> {
           Container(
             margin: EdgeInsets.symmetric(horizontal: width * 0.05),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(width * 0.05),
               boxShadow: [
                 BoxShadow(
@@ -110,7 +111,7 @@ class _PengaturanState extends State<Pengaturan> {
                       style: GoogleFonts.roboto(
                         fontSize: width * 0.04,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xFF00C3D4),
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                     onTap: () {
@@ -175,7 +176,7 @@ class _PengaturanState extends State<Pengaturan> {
                           style: GoogleFonts.roboto(
                             fontSize: width * 0.04,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFF00C3D4),
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                         onTap: () => themeController.toggleTheme(),
@@ -210,7 +211,7 @@ class _PengaturanState extends State<Pengaturan> {
                       style: GoogleFonts.roboto(
                         fontSize: width * 0.04,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xFF00C3D4),
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                     onTap: () => Get.to(() => ProfilView()),
@@ -237,7 +238,7 @@ class _PengaturanState extends State<Pengaturan> {
                       style: GoogleFonts.roboto(
                         fontSize: width * 0.04,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xFF00C3D4),
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                     onTap: () async {

@@ -6,6 +6,7 @@ import '../database/database_helper.dart';
 import 'login_view.dart';
 import 'package:GoShipp/constant/constantVariabel.dart';
 import 'package:GoShipp/widget/custom_bottom_bar.dart';
+import '../main.dart';
 
 class ProfilView extends StatefulWidget {
   const ProfilView({super.key});
@@ -35,26 +36,27 @@ class _ProfilViewState extends State<ProfilView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE0F6FF),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
         title: Text(
           'Profil',
           style: GoogleFonts.roboto(
-            color: Color(0xFF00C3D4),
+            color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Color(0xFF00C3D4)),
+          icon:
+              Icon(Icons.arrow_back_ios, color: Theme.of(context).primaryColor),
           onPressed: () => Get.back(),
         ),
         actions: [
           IconButton(
             icon: Icon(
               isEditing ? Icons.save : Icons.edit,
-              color: Color(0xFF00C3D4),
+              color: Theme.of(context).primaryColor,
             ),
             onPressed: () async {
               if (isEditing) {
@@ -70,12 +72,14 @@ class _ProfilViewState extends State<ProfilView> {
                       'Sukses',
                       'Profil berhasil diperbarui',
                       snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.green[100],
-                      colorText: Colors.green[800],
+                      backgroundColor:
+                          Theme.of(context).primaryColor.withOpacity(0.1),
+                      colorText: Theme.of(context).primaryColor,
                       duration: Duration(seconds: 2),
                       margin: EdgeInsets.all(width * 0.05),
                       borderRadius: width * 0.02,
-                      icon: Icon(Icons.check_circle, color: Colors.green[800]),
+                      icon: Icon(Icons.check_circle,
+                          color: Theme.of(context).primaryColor),
                     );
                   }
                 } catch (e) {
@@ -83,12 +87,12 @@ class _ProfilViewState extends State<ProfilView> {
                     'Error',
                     e.toString(),
                     snackPosition: SnackPosition.BOTTOM,
-                    backgroundColor: Colors.red[100],
-                    colorText: Colors.red[800],
+                    backgroundColor: Colors.red.withOpacity(0.1),
+                    colorText: Colors.red,
                     duration: Duration(seconds: 3),
                     margin: EdgeInsets.all(width * 0.05),
                     borderRadius: width * 0.02,
-                    icon: Icon(Icons.error_outline, color: Colors.red[800]),
+                    icon: Icon(Icons.error_outline, color: Colors.red),
                   );
                 }
               }
@@ -106,11 +110,16 @@ class _ProfilViewState extends State<ProfilView> {
             Container(
               margin: EdgeInsets.all(width * 0.05),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(width * 0.05),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.color
+                            ?.withOpacity(0.1) ??
+                        Colors.grey.withOpacity(0.1),
                     spreadRadius: 1,
                     blurRadius: 3,
                     offset: Offset(0, 2),
@@ -126,7 +135,12 @@ class _ProfilViewState extends State<ProfilView> {
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
-                            color: Colors.grey.withOpacity(0.1),
+                            color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.color
+                                    ?.withOpacity(0.1) ??
+                                Colors.grey.withOpacity(0.1),
                             width: 1,
                           ),
                         ),
@@ -135,12 +149,13 @@ class _ProfilViewState extends State<ProfilView> {
                         leading: Container(
                           padding: EdgeInsets.all(width * 0.02),
                           decoration: BoxDecoration(
-                            color: Color(0xFF00C3D4).withOpacity(0.1),
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(width * 0.02),
                           ),
                           child: Icon(
                             Icons.person_outline,
-                            color: Color(0xFF00C3D4),
+                            color: Theme.of(context).primaryColor,
                             size: width * 0.06,
                           ),
                         ),
@@ -149,14 +164,16 @@ class _ProfilViewState extends State<ProfilView> {
                           style: GoogleFonts.roboto(
                             fontSize: width * 0.04,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFF00C3D4),
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                         subtitle: Text(
                           user?.username ?? '',
                           style: GoogleFonts.roboto(
                             fontSize: width * 0.035,
-                            color: Colors.black87,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color ??
+                                    Colors.black,
                           ),
                         ),
                       ),
@@ -166,7 +183,12 @@ class _ProfilViewState extends State<ProfilView> {
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
-                            color: Colors.grey.withOpacity(0.1),
+                            color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.color
+                                    ?.withOpacity(0.1) ??
+                                Colors.grey.withOpacity(0.1),
                             width: 1,
                           ),
                         ),
@@ -175,12 +197,13 @@ class _ProfilViewState extends State<ProfilView> {
                         leading: Container(
                           padding: EdgeInsets.all(width * 0.02),
                           decoration: BoxDecoration(
-                            color: Color(0xFF00C3D4).withOpacity(0.1),
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(width * 0.02),
                           ),
                           child: Icon(
                             Icons.email_outlined,
-                            color: Color(0xFF00C3D4),
+                            color: Theme.of(context).primaryColor,
                             size: width * 0.06,
                           ),
                         ),
@@ -189,14 +212,16 @@ class _ProfilViewState extends State<ProfilView> {
                           style: GoogleFonts.roboto(
                             fontSize: width * 0.04,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFF00C3D4),
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                         subtitle: Text(
                           user?.email ?? '',
                           style: GoogleFonts.roboto(
                             fontSize: width * 0.035,
-                            color: Colors.black87,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color ??
+                                    Colors.black,
                           ),
                         ),
                       ),
@@ -211,7 +236,7 @@ class _ProfilViewState extends State<ProfilView> {
                             style: GoogleFonts.roboto(
                               fontSize: width * 0.04,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xFF00C3D4),
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                           SizedBox(height: width * 0.02),
@@ -219,7 +244,12 @@ class _ProfilViewState extends State<ProfilView> {
                             controller: namaLengkapController,
                             decoration: InputDecoration(
                               filled: true,
-                              fillColor: Colors.grey.withOpacity(0.05),
+                              fillColor: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color
+                                      ?.withOpacity(0.05) ??
+                                  Colors.grey.withOpacity(0.05),
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(width * 0.02),
@@ -233,8 +263,8 @@ class _ProfilViewState extends State<ProfilView> {
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(width * 0.02),
-                                borderSide:
-                                    BorderSide(color: Color(0xFF00C3D4)),
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor),
                               ),
                             ),
                             enabled: isEditing,
@@ -245,7 +275,7 @@ class _ProfilViewState extends State<ProfilView> {
                             style: GoogleFonts.roboto(
                               fontSize: width * 0.04,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xFF00C3D4),
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                           SizedBox(height: width * 0.02),
@@ -253,7 +283,12 @@ class _ProfilViewState extends State<ProfilView> {
                             controller: alamatController,
                             decoration: InputDecoration(
                               filled: true,
-                              fillColor: Colors.grey.withOpacity(0.05),
+                              fillColor: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color
+                                      ?.withOpacity(0.05) ??
+                                  Colors.grey.withOpacity(0.05),
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(width * 0.02),
@@ -267,8 +302,8 @@ class _ProfilViewState extends State<ProfilView> {
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(width * 0.02),
-                                borderSide:
-                                    BorderSide(color: Color(0xFF00C3D4)),
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor),
                               ),
                             ),
                             maxLines: 3,
@@ -280,7 +315,7 @@ class _ProfilViewState extends State<ProfilView> {
                             style: GoogleFonts.roboto(
                               fontSize: width * 0.04,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xFF00C3D4),
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                           SizedBox(height: width * 0.02),
@@ -288,7 +323,12 @@ class _ProfilViewState extends State<ProfilView> {
                             controller: noHpController,
                             decoration: InputDecoration(
                               filled: true,
-                              fillColor: Colors.grey.withOpacity(0.05),
+                              fillColor: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color
+                                      ?.withOpacity(0.05) ??
+                                  Colors.grey.withOpacity(0.05),
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(width * 0.02),
@@ -302,8 +342,8 @@ class _ProfilViewState extends State<ProfilView> {
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(width * 0.02),
-                                borderSide:
-                                    BorderSide(color: Color(0xFF00C3D4)),
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor),
                               ),
                             ),
                             keyboardType: TextInputType.phone,
@@ -347,13 +387,13 @@ class _ProfilViewState extends State<ProfilView> {
                                 'Error',
                                 'Gagal menghapus akun',
                                 snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: Colors.red[100],
-                                colorText: Colors.red[800],
+                                backgroundColor: Colors.red.withOpacity(0.1),
+                                colorText: Colors.red,
                                 duration: Duration(seconds: 3),
                                 margin: EdgeInsets.all(width * 0.05),
                                 borderRadius: width * 0.02,
                                 icon: Icon(Icons.error_outline,
-                                    color: Colors.red[800]),
+                                    color: Colors.red),
                               );
                             }
                           },
