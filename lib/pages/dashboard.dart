@@ -176,15 +176,6 @@ class _DashboardState extends State<Dashboard> {
                           Radius.circular(width * 0.05),
                         ),
                         color: Theme.of(context).cardColor,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Theme.of(context)
-                                .primaryColor
-                                .withOpacity(0.08),
-                            blurRadius: 8,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
                       ),
                       width: width * 0.8,
                       child: Row(
@@ -254,15 +245,6 @@ class _DashboardState extends State<Dashboard> {
                           Radius.circular(width * 0.05),
                         ),
                         color: Theme.of(context).cardColor,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Theme.of(context)
-                                .primaryColor
-                                .withOpacity(0.08),
-                            blurRadius: 8,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
                       ),
                       width: width * 0.6,
                       height: height * 0.05,
@@ -437,19 +419,6 @@ class _DashboardState extends State<Dashboard> {
                                           width: width * 0.7,
                                           height: width * 0.15,
                                           decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyLarge
-                                                        ?.color
-                                                        ?.withAlpha(128) ??
-                                                    Colors.black.withAlpha(128),
-                                                spreadRadius: 2,
-                                                blurRadius: 3,
-                                                offset: Offset(2, 4),
-                                              ),
-                                            ],
                                             borderRadius: new BorderRadius.only(
                                               topLeft:
                                                   Radius.circular(width * 0.04),
@@ -616,17 +585,6 @@ class _DashboardState extends State<Dashboard> {
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                      color: Theme.of(context)
-                              .textTheme
-                              .bodyLarge
-                              ?.color
-                              ?.withAlpha(128) ??
-                          Colors.black.withAlpha(128),
-                      spreadRadius: 5,
-                      blurRadius: 10)
-                ],
               ),
               child: Container(
                 padding: EdgeInsets.all(20),

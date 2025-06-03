@@ -378,7 +378,10 @@ class _CekOngkirState extends State<CekOngkir> {
                             'Cari',
                             style: GoogleFonts.roboto(
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.black
+                                  : Colors.white,
                               fontSize: 18,
                               letterSpacing: 1.2,
                             ),
@@ -415,13 +418,6 @@ class _CekOngkirState extends State<CekOngkir> {
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Theme.of(context).textTheme.bodyMedium?.color ??
-                            Colors.grey.withAlpha(128),
-                        spreadRadius: 5,
-                        blurRadius: 10)
-                  ],
                 ),
                 child: Container(
                   padding: EdgeInsets.all(20),

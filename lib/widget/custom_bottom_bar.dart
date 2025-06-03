@@ -23,7 +23,9 @@ class CustomBottomBar extends StatelessWidget {
     ];
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xFFB6E5F8),
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.black
+            : Color(0xFFB6E5F8),
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
@@ -51,14 +53,18 @@ class CustomBottomBar extends StatelessWidget {
                   children: [
                     Icon(
                       item.icon,
-                      color: Colors.white,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Color(0xFF00C3D4)
+                          : Colors.white,
                       size: 28,
                     ),
                     SizedBox(height: 4),
                     Text(
                       item.label,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Color(0xFF00C3D4)
+                            : Colors.white,
                         fontWeight:
                             isActive ? FontWeight.bold : FontWeight.normal,
                         fontSize: 13,
