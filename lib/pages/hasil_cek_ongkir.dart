@@ -8,6 +8,7 @@ import 'package:GoShipp/models/ongkir.dart';
 import 'package:GoShipp/pages/cekOngkir.dart';
 import 'package:GoShipp/pages/dashboard.dart';
 import 'package:GoShipp/pages/pengaturan.dart';
+import 'package:GoShipp/widget/custom_bottom_bar.dart';
 
 class HasilCekOngkir extends StatefulWidget {
   String kotaAsal;
@@ -56,18 +57,6 @@ class _HasilCekOngkirState extends State<HasilCekOngkir> {
         }
       },
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Color.fromARGB(255, 55, 202, 236),
-          child: Icon(Icons.home),
-          onPressed: () {
-            Get.offAll(
-              () => Dashboard(),
-              transition: Transition.fade,
-              duration: Duration(seconds: 1),
-            );
-          },
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 55, 202, 236),
           title: Text(
@@ -374,62 +363,7 @@ class _HasilCekOngkirState extends State<HasilCekOngkir> {
                 ))
           ],
         ),
-        bottomNavigationBar: BottomAppBar(
-          shape: CircularNotchedRectangle(),
-          notchMargin: 5,
-          child: SizedBox(
-            height: 60,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                MaterialButton(
-                  minWidth: 40,
-                  onPressed: () {
-                    Get.offAll(
-                      () => CekOngkir(),
-                      transition: Transition.fade,
-                      duration: Duration(seconds: 1),
-                    );
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.price_change_outlined,
-                      ),
-                      Text(
-                        'Cek Ongkir',
-                        style: TextStyle(),
-                      ),
-                    ],
-                  ),
-                ),
-                MaterialButton(
-                  minWidth: 40,
-                  onPressed: () {
-                    Get.offAll(
-                      () => Pengaturan(),
-                      transition: Transition.fadeIn,
-                      duration: Duration(seconds: 1),
-                    );
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.dehaze_sharp,
-                      ),
-                      Text(
-                        'Pengaturan',
-                        style: TextStyle(),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
+        bottomNavigationBar: CustomBottomBar(activeIndex: 1),
       ),
     );
   }

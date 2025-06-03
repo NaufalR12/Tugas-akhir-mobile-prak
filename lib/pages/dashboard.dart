@@ -14,6 +14,7 @@ import 'package:GoShipp/pages/cekOngkir.dart';
 import 'package:GoShipp/pages/pengaturan.dart';
 import 'package:GoShipp/pages/riwayat_view.dart';
 import 'package:GoShipp/pages/tracking.dart';
+import 'package:GoShipp/widget/custom_bottom_bar.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -98,15 +99,6 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       backgroundColor: Color(0xFFE0F6FF),
       resizeToAvoidBottomInset: false,
-      floatingActionButton: Visibility(
-        visible: !keyboardIsOpen,
-        child: FloatingActionButton(
-          backgroundColor: Color(0xFF00C3D4),
-          child: Icon(Icons.home, color: Colors.white),
-          onPressed: () {},
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -680,76 +672,7 @@ class _DashboardState extends State<Dashboard> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 5,
-        color: Colors.white,
-        elevation: 8,
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              MaterialButton(
-                minWidth: 40,
-                onPressed: () {
-                  Get.offAll(
-                    () => CekOngkir(),
-                    transition: Transition.fadeIn,
-                    duration: Duration(seconds: 1),
-                  );
-                },
-                child: SizedBox(
-                  width: width * 0.2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.price_change_outlined,
-                        color: Colors.grey,
-                      ),
-                      Text(
-                        'Cek Ongkir',
-                        style: GoogleFonts.roboto(
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              MaterialButton(
-                minWidth: 40,
-                onPressed: () {
-                  Get.offAll(
-                    () => Pengaturan(),
-                    transition: Transition.fadeIn,
-                    duration: Duration(seconds: 1),
-                  );
-                },
-                child: SizedBox(
-                  width: width * 0.2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.settings,
-                        color: Colors.grey,
-                      ),
-                      Text(
-                        'Pengaturan',
-                        style: GoogleFonts.roboto(
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: CustomBottomBar(activeIndex: 0),
     );
   }
 

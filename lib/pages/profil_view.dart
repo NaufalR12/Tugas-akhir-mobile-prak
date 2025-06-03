@@ -5,6 +5,7 @@ import '../controller/auth_controller.dart';
 import '../database/database_helper.dart';
 import 'login_view.dart';
 import 'package:GoShipp/constant/constantVariabel.dart';
+import 'package:GoShipp/widget/custom_bottom_bar.dart';
 
 class ProfilView extends StatefulWidget {
   const ProfilView({super.key});
@@ -384,6 +385,7 @@ class _ProfilViewState extends State<ProfilView> {
           ],
         ),
       ),
+      bottomNavigationBar: CustomBottomBar(activeIndex: 3),
     );
   }
 }
