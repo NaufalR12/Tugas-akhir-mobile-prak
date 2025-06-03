@@ -58,7 +58,7 @@ class _PengaturanState extends State<Pengaturan> {
                 SizedBox(
                   width: width * 0.6,
                   height: width * 0.6,
-                  child: Image.asset('assets/icon/icon.png'),
+                  child: Image.asset('assets/icon.png'),
                 ),
                 SizedBox(height: width * 0.05),
               ],
