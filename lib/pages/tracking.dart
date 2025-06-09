@@ -100,21 +100,6 @@ class _Tracking2State extends State<Tracking2> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(top: width * 0.03),
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Color.fromARGB(255, 5, 78, 94)),
-                          borderRadius: BorderRadius.circular(width * 0.04),
-                        ),
-                        width: width * 0.4,
-                        height: width * 0.2,
-                        child: widget.svg.isNotEmpty
-                            ? SvgPicture.asset(widget.svg)
-                            : Icon(Icons.image_not_supported,
-                                size: 48, color: Colors.grey),
-                      ),
                       SizedBox(height: width * 0.01),
                       Text(
                         "${snapshot.data!.data!.summary!.service}",
