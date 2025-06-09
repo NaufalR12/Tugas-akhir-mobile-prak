@@ -4,49 +4,50 @@ import '../models/riwayat.dart';
 import 'auth_controller.dart';
 
 class RiwayatController extends GetxController {
-  final DatabaseHelper _dbHelper = DatabaseHelper.instance;
+  final DatabaseHelper _dbHelper = DatabaseHelper();
   final AuthController _authController = Get.find<AuthController>();
-  final RxList<Riwayat> riwayatList = <Riwayat>[].obs;
+  final RxList<Riwayat> daftarRiwayat = <Riwayat>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    loadRiwayat();
+    muatRiwayat();
   }
 
-  Future<void> loadRiwayat() async {
-    final user = _authController.currentUser.value;
-    if (user != null) {
-      final riwayat = await _dbHelper.getRiwayatByUserId(user.id!);
-      riwayatList.value = riwayat;
+  Future<void> muatRiwayat() async {
+    final pengguna = _authController.penggunaAktif.value;
+    if (pengguna != null) {
+      final riwayat = await _dbHelper.ambilRiwayat(pengguna.id!);
+      daftarRiwayat.value = riwayat;
     }
   }
 
-  Future<void> addRiwayat(String noResi, String kurir, String status) async {
-    final user = _authController.currentUser.value;
-    if (user != null) {
+  Future<void> tambahRiwayat(
+      String nomorResi, String kurir, String status) async {
+    final pengguna = _authController.penggunaAktif.value;
+    if (pengguna != null) {
       final riwayat = Riwayat(
-        userId: user.id!,
-        noResi: noResi,
+        idPengguna: pengguna.id!,
+        nomorResi: nomorResi,
         kurir: kurir,
         status: status,
         tanggal: DateTime.now().toIso8601String(),
       );
-      await _dbHelper.createRiwayat(riwayat);
-      await loadRiwayat();
+      await _dbHelper.tambahRiwayat(riwayat);
+      await muatRiwayat();
     }
   }
 
-  Future<void> deleteRiwayat(int id) async {
-    await _dbHelper.deleteRiwayat(id);
-    await loadRiwayat();
+  Future<void> hapusRiwayat(int id) async {
+    await _dbHelper.hapusRiwayat(id);
+    await muatRiwayat();
   }
 
   Future<void> deleteAllRiwayat() async {
-    final user = _authController.currentUser.value;
-    if (user != null) {
-      await _dbHelper.deleteAllRiwayatByUserId(user.id!);
-      await loadRiwayat();
+    final pengguna = _authController.penggunaAktif.value;
+    if (pengguna != null) {
+      await _dbHelper.hapusSemuaRiwayat(pengguna.id!);
+      await muatRiwayat();
     }
   }
 }

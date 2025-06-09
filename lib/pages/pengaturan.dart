@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:GoShipp/constant/constantVariabel.dart';
-import 'package:GoShipp/pages/cekOngkir.dart';
-import 'package:GoShipp/pages/dashboard.dart';
-import 'package:GoShipp/widget/lainnya/delete_widget.dart';
 import '../controller/auth_controller.dart';
+import '../controller/riwayat_controller.dart';
 import 'login_view.dart';
-import 'profil_view.dart';
+
 import 'package:GoShipp/controller/theme_controller.dart';
 import 'package:GoShipp/widget/custom_bottom_bar.dart';
-import '../main.dart';
+import 'package:GoShipp/pages/kesan_saran.dart';
+import 'package:GoShipp/pages/konversi.dart';
 
 class Pengaturan extends StatefulWidget {
   const Pengaturan({super.key});
@@ -22,6 +21,7 @@ class Pengaturan extends StatefulWidget {
 class _PengaturanState extends State<Pengaturan> {
   final AuthController authController = Get.find<AuthController>();
   final ThemeController themeController = Get.find<ThemeController>();
+  final RiwayatController riwayatController = Get.find<RiwayatController>();
 
   @override
   Widget build(BuildContext context) {
@@ -126,8 +126,20 @@ class _PengaturanState extends State<Pengaturan> {
                               child: Text('Batal'),
                             ),
                             TextButton(
-                              onPressed: () {
+                              onPressed: () async {
+                                await riwayatController.deleteAllRiwayat();
                                 Get.back();
+                                Get.snackbar(
+                                  'Sukses',
+                                  'Semua riwayat telah dihapus',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  backgroundColor:
+                                      Colors.green.withOpacity(0.1),
+                                  colorText: Colors.green,
+                                  duration: Duration(seconds: 2),
+                                  margin: EdgeInsets.all(width * 0.05),
+                                  borderRadius: width * 0.02,
+                                );
                               },
                               child: Text('Hapus',
                                   style: TextStyle(color: Colors.red)),
@@ -192,29 +204,55 @@ class _PengaturanState extends State<Pengaturan> {
                     ),
                   ),
                   child: ListTile(
-                    contentPadding: EdgeInsets.symmetric(
-                        horizontal: width * 0.05, vertical: width * 0.02),
-                    leading: Container(
-                      padding: EdgeInsets.all(width * 0.02),
-                      decoration: BoxDecoration(
-                        color: Colors.blue.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(width * 0.02),
-                      ),
-                      child: Icon(
-                        Icons.person,
-                        color: Colors.blue,
-                        size: width * 0.06,
-                      ),
-                    ),
-                    title: Text(
-                      'Profil',
-                      style: GoogleFonts.roboto(
-                        fontSize: width * 0.04,
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(context).primaryColor,
+                    leading: Icon(Icons.location_on,
+                        color: Theme.of(context).primaryColor),
+                    title: Text('Cari Ekspedisi Terdekat'),
+                    onTap: () {
+                      Get.toNamed('/map');
+                    },
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.grey.withOpacity(0.1),
+                        width: 1,
                       ),
                     ),
-                    onTap: () => Get.to(() => ProfilView()),
+                  ),
+                  child: ListTile(
+                    leading: Icon(Icons.rate_review,
+                        color: Theme.of(context).primaryColor),
+                    title: Text('Kesan dan Saran'),
+                    onTap: () {
+                      Get.to(() => HelpPage());
+                    },
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.grey.withOpacity(0.1),
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                  child: ListTile(
+                    leading: Icon(Icons.currency_exchange, color: Colors.blue),
+                    title: Text('Konversi Mata Uang & Waktu'),
+                    onTap: () => Get.to(() => KonversiPage()),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.grey.withOpacity(0.1),
+                        width: 1,
+                      ),
+                    ),
                   ),
                 ),
                 Container(
@@ -253,7 +291,7 @@ class _PengaturanState extends State<Pengaturan> {
                             ),
                             TextButton(
                               onPressed: () async {
-                                await authController.logout();
+                                await authController.keluar();
                                 Get.offAll(() => LoginView());
                               },
                               child: Text('Ya',

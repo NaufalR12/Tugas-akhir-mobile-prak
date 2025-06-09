@@ -6,7 +6,6 @@ import '../database/database_helper.dart';
 import 'login_view.dart';
 import 'package:GoShipp/constant/constantVariabel.dart';
 import 'package:GoShipp/widget/custom_bottom_bar.dart';
-import '../main.dart';
 
 class ProfilView extends StatefulWidget {
   const ProfilView({super.key});
@@ -21,15 +20,16 @@ class _ProfilViewState extends State<ProfilView> {
   final TextEditingController alamatController = TextEditingController();
   final TextEditingController noHpController = TextEditingController();
   bool isEditing = false;
+  final DatabaseHelper _dbHelper = DatabaseHelper();
 
   @override
   void initState() {
     super.initState();
-    final user = authController.currentUser.value;
+    final user = authController.penggunaAktif.value;
     if (user != null) {
       namaLengkapController.text = user.namaLengkap ?? '';
       alamatController.text = user.alamat ?? '';
-      noHpController.text = user.noHp ?? '';
+      noHpController.text = user.nomorHp ?? '';
     }
   }
 
@@ -61,11 +61,11 @@ class _ProfilViewState extends State<ProfilView> {
             onPressed: () async {
               if (isEditing) {
                 try {
-                  final success = await authController.updateProfile(
-                    userId: authController.currentUser.value!.id!,
+                  final success = await authController.perbaruiProfil(
+                    idPengguna: authController.penggunaAktif.value!.id!,
                     namaLengkap: namaLengkapController.text,
                     alamat: alamatController.text,
-                    noHp: noHpController.text,
+                    nomorHp: noHpController.text,
                   );
                   if (success) {
                     Get.snackbar(
@@ -127,7 +127,7 @@ class _ProfilViewState extends State<ProfilView> {
                 ],
               ),
               child: Obx(() {
-                final user = authController.currentUser.value;
+                final user = authController.penggunaAktif.value;
                 return Column(
                   children: [
                     Container(
@@ -168,7 +168,7 @@ class _ProfilViewState extends State<ProfilView> {
                           ),
                         ),
                         subtitle: Text(
-                          user?.username ?? '',
+                          user?.namaPengguna ?? '',
                           style: GoogleFonts.roboto(
                             fontSize: width * 0.035,
                             color:
@@ -375,11 +375,10 @@ class _ProfilViewState extends State<ProfilView> {
                           onPressed: () async {
                             try {
                               final userId =
-                                  authController.currentUser.value?.id;
+                                  authController.penggunaAktif.value?.id;
                               if (userId != null) {
-                                await DatabaseHelper.instance
-                                    .deleteUser(userId);
-                                await authController.logout();
+                                await _dbHelper.hapusPengguna(userId);
+                                await authController.keluar();
                                 Get.offAll(() => LoginView());
                               }
                             } catch (e) {

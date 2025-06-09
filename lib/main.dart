@@ -11,6 +11,14 @@ import 'controller/theme_controller.dart';
 import 'pages/login_view.dart';
 import 'pages/onboarding_page.dart';
 import 'package:GoShipp/controller/riwayat_controller.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import 'package:GoShipp/controller/tracking_controller.dart';
+import 'pages/riwayat_view.dart';
+import 'pages/pengaturan.dart';
+import 'package:GoShipp/pages/kesan_saran.dart';
+import 'package:GoShipp/pages/tracking.dart';
+import 'package:GoShipp/pages/konversi.dart';
 
 // Variabel warna untuk mode terang (light) dan gelap (dark) agar konsisten di seluruh halaman.
 const Color lightPrimaryColor = Color(0xFF00C3D4);
@@ -29,15 +37,28 @@ const Color darkTextColor = Colors.white;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final AuthController authController = Get.put(AuthController());
-  final ThemeController themeController = Get.put(ThemeController());
+
+  // Inisialisasi database
+  final databasePath = await getDatabasesPath();
+  final path = join(databasePath, 'paketku.db');
+
+  // Hapus database lama jika ada
+  await deleteDatabase(path);
+
+  // Inisialisasi controller
+  Get.put(AuthController());
+  Get.put(ThemeController());
+  Get.put(TrackingController());
   Get.put(RiwayatController());
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
   final ThemeController themeController = Get.put(ThemeController());
+
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +97,23 @@ class MyApp extends StatelessWidget {
           themeMode:
               themeController.isDarkMode ? ThemeMode.dark : ThemeMode.light,
           home: Obx(() =>
-              authController.isLoggedIn.value ? Dashboard() : OnboardingPage()),
+              authController.sudahLogin.value ? Dashboard() : OnboardingPage()),
+          getPages: [
+            GetPage(name: '/riwayat', page: () => RiwayatView()),
+            GetPage(name: '/pengaturan', page: () => Pengaturan()),
+            GetPage(name: '/kesan_saran', page: () => HelpPage()),
+            GetPage(
+                name: '/tracking2',
+                page: () {
+                  final args = Get.arguments ?? {};
+                  return Tracking2(
+                    receipt: args['receipt'] ?? args['nomorResi'] ?? '',
+                    jk: args['jk'] ?? args['kurir'] ?? '',
+                    svg: args['svg'] ?? '',
+                  );
+                }),
+            GetPage(name: '/konversi', page: () => KonversiPage()),
+          ],
         ));
   }
 }

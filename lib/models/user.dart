@@ -1,43 +1,43 @@
 class User {
   final int? id;
-  final String username;
+  final String namaPengguna;
   final String email;
-  final String password;
+  final String kataSandi;
   final String? namaLengkap;
   final String? alamat;
-  final String? noHp;
+  final String? nomorHp;
 
   User({
     this.id,
-    required this.username,
+    required this.namaPengguna,
     required this.email,
-    required this.password,
+    required this.kataSandi,
     this.namaLengkap,
     this.alamat,
-    this.noHp,
+    this.nomorHp,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'username': username,
+      'nama_pengguna': namaPengguna,
       'email': email,
-      'password': password,
+      'kata_sandi': kataSandi,
       'nama_lengkap': namaLengkap,
       'alamat': alamat,
-      'no_hp': noHp,
+      'nomor_hp': nomorHp,
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       id: map['id'],
-      username: map['username'],
+      namaPengguna: map['nama_pengguna'],
       email: map['email'],
-      password: map['password'],
+      kataSandi: map['kata_sandi'],
       namaLengkap: map['nama_lengkap'],
       alamat: map['alamat'],
-      noHp: map['no_hp'],
+      nomorHp: map['nomor_hp'],
     );
   }
-} 
+}

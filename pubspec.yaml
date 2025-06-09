@@ -50,6 +50,11 @@ dependencies:
   path: ^1.8.3
   shared_preferences: ^2.2.2
   bcrypt: ^1.1.3
+  flutter_map: ^8.1.1
+  latlong2: ^0.9.1
+  flutter_polyline_points: ^2.0.0
+  accordion: ^2.2.1
+  sensors_plus: ^6.1.1
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +89,12 @@ flutter:
   assets:
     - assets/
     - assets/logo/
+    - assets/logo/jne.svg
+    - assets/logo/jnt.svg
+    - assets/logo/sicepat.svg
+    - assets/logo/pos.svg
+    - assets/logo/spx.svg
+    - assets/logo/default.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

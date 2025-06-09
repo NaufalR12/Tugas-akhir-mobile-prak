@@ -7,8 +7,7 @@ import 'package:GoShipp/pages/profil_view.dart';
 
 class CustomBottomBar extends StatelessWidget {
   final int activeIndex;
-  const CustomBottomBar({Key? key, required this.activeIndex})
-      : super(key: key);
+  const CustomBottomBar({super.key, required this.activeIndex});
 
   @override
   Widget build(BuildContext context) {

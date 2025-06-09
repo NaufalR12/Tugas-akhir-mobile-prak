@@ -148,3 +148,14 @@ class History {
     return data;
   }
 }
+
+String konversiZona(String waktu, int offset) {
+  // waktu format: '2024-06-08 13:45'
+  try {
+    final dt = DateTime.parse(waktu.replaceAll('/', '-'));
+    final jam = dt.toUtc().add(Duration(hours: offset));
+    return '${jam.hour.toString().padLeft(2, '0')}:${jam.minute.toString().padLeft(2, '0')}';
+  } catch (_) {
+    return '-';
+  }
+}

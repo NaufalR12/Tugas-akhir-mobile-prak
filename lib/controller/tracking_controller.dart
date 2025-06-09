@@ -12,8 +12,10 @@ import 'package:GoShipp/controller/auth_controller.dart';
 
 class TrackingController extends GetxController {
   String alamat = "";
-  TextEditingController receipt = TextEditingController();
-  String jKirim = "";
+  final receipt = TextEditingController();
+  final kurir = ''.obs;
+  final svg = ''.obs;
+  Future<Receipt>? futureReceipt;
   List<dynamic> data = []; //edited line
   Map<String, dynamic> map = {};
   RxString namaSVG = "".obs;
@@ -30,18 +32,25 @@ class TrackingController extends GetxController {
     update();
   }
 
-  Future<Receipt> fetchData(receipt, jk) async {
+  void cariResi() {
+    if (receipt.text.isNotEmpty && kurir.value.isNotEmpty) {
+      futureReceipt = fetchData(receipt.text, kurir.value);
+      update();
+    }
+  }
+
+  Future<Receipt> fetchData(String receipt, String jk) async {
     try {
       if (jk == 'Shopee') {
-        jKirim = "spx";
+        kurir.value = "spx";
       } else if (jk == 'SAP') {
-        jKirim = "sap";
+        kurir.value = "sap";
       } else if (jk == 'ID express') {
-        jKirim = "ide";
+        kurir.value = "ide";
       } else if (jk == 'J&T') {
-        jKirim = "jnt";
+        kurir.value = "jnt";
       } else {
-        jKirim = jk;
+        kurir.value = jk;
       }
       final ioc = new HttpClient();
       ioc.badCertificateCallback =
@@ -49,7 +58,7 @@ class TrackingController extends GetxController {
       final http = new IOClient(ioc);
       final response = await http
           .get(Uri.parse(
-              "https://api.binderbyte.com/v1/track?api_key=$apiKey&courier=$jKirim&awb=" +
+              "https://api.binderbyte.com/v1/track?api_key=$apiKey&courier=${kurir.value}&awb=" +
                   receipt))
           .timeout(
         const Duration(seconds: 4),
@@ -62,9 +71,9 @@ class TrackingController extends GetxController {
         alamat = responseData['data']['detail']['destination'];
 
         // Simpan ke riwayat jika user sudah login
-        if (_authController.isLoggedIn.value) {
+        if (_authController.sudahLogin.value) {
           final status = responseData['data']['summary']['status'] ?? 'Unknown';
-          await _riwayatController.addRiwayat(receipt, jKirim, status);
+          await _riwayatController.tambahRiwayat(receipt, kurir.value, status);
         }
 
         // Simpan ke SQLHelper untuk kompatibilitas
@@ -72,7 +81,7 @@ class TrackingController extends GetxController {
           receipt,
           alamat,
           namaSVG.toString(),
-          jKirim,
+          kurir.value,
         );
 
         return Receipt.fromJson(responseData);

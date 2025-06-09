@@ -1,14 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/auth_controller.dart';
-import 'register_view.dart';
 import 'dashboard.dart';
+import 'register_view.dart';
 
-class LoginView extends StatelessWidget {
-  final AuthController authController = Get.put(AuthController());
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  final AuthController authController = Get.find<AuthController>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final RxBool isLoading = false.obs;
+  bool isLoading = false;
+
+  void _handleLogin() async {
+    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Username dan password harus diisi',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.1),
+        colorText: Colors.red,
+        duration: Duration(seconds: 3),
+        margin: EdgeInsets.all(16),
+        borderRadius: 8,
+        icon: Icon(Icons.error_outline, color: Colors.red),
+      );
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      final success = await authController.masuk(
+        usernameController.text,
+        passwordController.text,
+      );
+      if (success) {
+        Get.snackbar(
+          'Sukses',
+          'Login berhasil',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green.withOpacity(0.1),
+          colorText: Colors.green,
+          duration: Duration(seconds: 2),
+          margin: EdgeInsets.all(16),
+          borderRadius: 8,
+          icon: Icon(Icons.check_circle_outline, color: Colors.green),
+        );
+        Get.offAll(() => Dashboard());
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.1),
+        colorText: Colors.red,
+        duration: Duration(seconds: 3),
+        margin: EdgeInsets.all(16),
+        borderRadius: 8,
+        icon: Icon(Icons.error_outline, color: Colors.red),
+      );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +138,7 @@ class LoginView extends StatelessWidget {
                           Obx(() => TextField(
                                 controller: passwordController,
                                 obscureText:
-                                    authController.isPasswordHidden.value,
+                                    authController.sandiTersembunyi.value,
                                 decoration: InputDecoration(
                                   hintText: 'password',
                                   border: OutlineInputBorder(
@@ -85,64 +150,52 @@ class LoginView extends StatelessWidget {
                               )),
                           IconButton(
                             icon: Obx(() => Icon(
-                                  authController.isPasswordHidden.value
+                                  authController.sandiTersembunyi.value
                                       ? Icons.visibility_off_outlined
                                       : Icons.visibility_outlined,
                                   color: Colors.purple[200],
                                 )),
                             onPressed: () {
-                              authController.isPasswordHidden.value =
-                                  !authController.isPasswordHidden.value;
+                              authController.sandiTersembunyi.value =
+                                  !authController.sandiTersembunyi.value;
                             },
                           ),
                         ],
                       ),
                       const SizedBox(height: 28),
-                      Obx(() => isLoading.value
-                          ? const Center(child: CircularProgressIndicator())
-                          : SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  isLoading.value = true;
-                                  try {
-                                    final success = await authController.login(
-                                      usernameController.text,
-                                      passwordController.text,
-                                    );
-                                    if (success) {
-                                      Get.off(() => Dashboard());
-                                    }
-                                  } catch (e) {
-                                    Get.snackbar(
-                                      'Error',
-                                      e.toString(),
-                                      snackPosition: SnackPosition.BOTTOM,
-                                    );
-                                  } finally {
-                                    isLoading.value = false;
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.black,
-                                  foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: isLoading ? null : _handleLogin,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            elevation: 4,
+                            shadowColor: Colors.purple[100],
+                          ),
+                          child: isLoading
+                              ? SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white),
                                   ),
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 14),
-                                  elevation: 4,
-                                  shadowColor: Colors.purple[100],
-                                ),
-                                child: const Text(
+                                )
+                              : const Text(
                                   'MASUK',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
                                 ),
-                              ),
-                            )),
+                        ),
+                      ),
                       const SizedBox(height: 18),
                       Center(
                         child: GestureDetector(

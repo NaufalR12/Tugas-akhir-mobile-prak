@@ -15,9 +15,7 @@ import 'package:GoShipp/models/kota.dart';
 import 'package:GoShipp/models/ongkir.dart';
 import 'package:GoShipp/pages/dashboard.dart';
 import 'package:GoShipp/pages/hasil_cek_ongkir.dart';
-import 'package:GoShipp/pages/pengaturan.dart';
 import 'package:GoShipp/widget/custom_bottom_bar.dart';
-import '../main.dart';
 
 class CekOngkir extends StatefulWidget {
   const CekOngkir({super.key});

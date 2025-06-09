@@ -6,8 +6,6 @@ import 'package:GoShipp/controller/ongkir_controller.dart';
 import 'package:GoShipp/models/api.dart';
 import 'package:GoShipp/models/ongkir.dart';
 import 'package:GoShipp/pages/cekOngkir.dart';
-import 'package:GoShipp/pages/dashboard.dart';
-import 'package:GoShipp/pages/pengaturan.dart';
 import 'package:GoShipp/widget/custom_bottom_bar.dart';
 
 class HasilCekOngkir extends StatefulWidget {
@@ -33,6 +31,18 @@ class HasilCekOngkir extends StatefulWidget {
 class _HasilCekOngkirState extends State<HasilCekOngkir> {
   final controllerOngkir = Get.put(OngkirController());
   late Future<Ongkir> futureOngkir;
+  final Map<String, double> rates = {
+    'IDR': 1.0,
+    'USD': 0.000065,
+    'EUR': 0.000060,
+    'GBP': 0.000052,
+  };
+  String selectedCurrency = 'IDR';
+
+  double konversiHarga(int harga) {
+    return harga * rates[selectedCurrency]!;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -78,7 +88,7 @@ class _HasilCekOngkirState extends State<HasilCekOngkir> {
             },
           ),
         ),
-        body: ListView(
+        body: Column(
           children: [
             FutureBuilder<Ongkir>(
               future: futureOngkir,
@@ -221,146 +231,162 @@ class _HasilCekOngkirState extends State<HasilCekOngkir> {
               thickness: 5,
               color: Colors.black.withAlpha(25),
             ),
-            Container(
-                margin: EdgeInsets.only(
-                  top: width * 0.03,
-                ),
-                height: height * 0.5,
-                width: width,
-                child: FutureBuilder<Ongkir>(
-                  future: futureOngkir,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
-                        itemCount: snapshot
-                            .data!.rajaongkir!.results![0].costs!.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: new BorderRadius.all(
-                                Radius.circular(width * 0.05),
-                              ),
-                              border: Border.all(
-                                color: Color.fromARGB(255, 5, 78, 94),
-                                width: width * 0.005,
-                              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                children: [
+                  Text('Mata Uang:',
+                      style: GoogleFonts.roboto(fontWeight: FontWeight.bold)),
+                  SizedBox(width: 8),
+                  DropdownButton<String>(
+                    value: selectedCurrency,
+                    items: rates.keys
+                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (val) => setState(() => selectedCurrency = val!),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: FutureBuilder<Ongkir>(
+                future: futureOngkir,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount:
+                          snapshot.data!.rajaongkir!.results![0].costs!.length,
+                      itemBuilder: (context, index) {
+                        final cost = snapshot.data!.rajaongkir!.results![0]
+                                .costs![index].cost![0].value ??
+                            0;
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: new BorderRadius.all(
+                              Radius.circular(width * 0.05),
                             ),
-                            margin: EdgeInsets.only(
-                              top: width * 0.05,
-                              left: width * 0.07,
-                              right: width * 0.07,
+                            border: Border.all(
+                              color: Color.fromARGB(255, 5, 78, 94),
+                              width: width * 0.005,
                             ),
-                            child: ListTile(
-                              style: ListTileStyle.list,
-                              title: Text(
-                                "${snapshot.data!.rajaongkir!.results![0].costs![index].service}",
-                                style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: height * 0.02,
-                                  color: Color.fromARGB(255, 5, 78, 94),
-                                ),
-                              ),
-                              subtitle: Text(
-                                "${snapshot.data!.rajaongkir!.results![0].costs![index].description}",
-                                style: GoogleFonts.roboto(
-                                  color: Colors.black.withAlpha(128),
-                                ),
-                              ),
-                              trailing: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    "Rp. ${snapshot.data!.rajaongkir!.results![0].costs![index].cost![0].value}",
-                                    style: GoogleFonts.roboto(
-                                      fontSize: height * 0.02,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 246, 142, 37),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    "${snapshot.data!.rajaongkir!.results![0].costs![index].cost![0].etd} Hari",
-                                    style: GoogleFonts.roboto(
-                                      color: Colors.black.withAlpha(128),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    } else if (snapshot.hasError) {
-                      return Center(
-                        child: SizedBox(
-                          width: width,
-                          height: width * 0.5,
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.all(20),
-                                child: Text(
-                                  '${snapshot.error}',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.black),
-                                ),
-                              ),
-                              InkWell(
-                                child: Container(
-                                  width: width * 2,
-                                  height: height / 18,
-                                  margin: EdgeInsets.only(
-                                    top: width * 0.03,
-                                    left: width * 0.35,
-                                    right: width * 0.35,
-                                  ),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Color.fromARGB(255, 2, 148, 46)),
-                                  child: Center(
-                                    child: Text(
-                                      'Retry',
-                                      style: TextStyle(
-                                          fontSize: height * 0.02,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                onTap: () => {
-                                  Get.offAll(
-                                    () => HasilCekOngkir(
-                                      jk: widget.jk,
-                                      kotaAsal: widget.kotaAsal,
-                                      kotaTujuan: widget.kotaTujuan,
-                                      totalPaket: widget.totalPaket,
-                                      namaSVG: widget.namaSVG,
-                                    ),
-                                    transition: Transition.fade,
-                                    duration: Duration(seconds: 1),
-                                  )
-                                },
-                              ),
-                            ],
                           ),
-                        ),
-                      );
-                    } else {
-                      return SizedBox(
+                          margin: EdgeInsets.only(
+                            top: width * 0.05,
+                            left: width * 0.07,
+                            right: width * 0.07,
+                          ),
+                          child: ListTile(
+                            style: ListTileStyle.list,
+                            title: Text(
+                              "${snapshot.data!.rajaongkir!.results![0].costs![index].service}",
+                              style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.bold,
+                                fontSize: height * 0.02,
+                                color: Color.fromARGB(255, 5, 78, 94),
+                              ),
+                            ),
+                            subtitle: Text(
+                              "${snapshot.data!.rajaongkir!.results![0].costs![index].description}",
+                              style: GoogleFonts.roboto(
+                                color: Colors.black.withAlpha(128),
+                              ),
+                            ),
+                            trailing: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                SizedBox(height: 5),
+                                Text(
+                                  selectedCurrency == 'IDR'
+                                      ? 'Rp. $cost'
+                                      : '${konversiHarga(cost).toStringAsFixed(2)} $selectedCurrency',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 246, 142, 37),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "${snapshot.data!.rajaongkir!.results![0].costs![index].cost![0].etd} Hari",
+                                  style: GoogleFonts.roboto(
+                                    color: Colors.black.withAlpha(128),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: SizedBox(
                         width: width,
-                        child: Center(
-                          child: CircularProgressIndicator(),
+                        height: width * 0.5,
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(20),
+                              child: Text(
+                                '${snapshot.error}',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.black),
+                              ),
+                            ),
+                            InkWell(
+                              child: Container(
+                                width: width * 2,
+                                height: height / 18,
+                                margin: EdgeInsets.only(
+                                  top: width * 0.03,
+                                  left: width * 0.35,
+                                  right: width * 0.35,
+                                ),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Color.fromARGB(255, 2, 148, 46)),
+                                child: Center(
+                                  child: Text(
+                                    'Retry',
+                                    style: TextStyle(
+                                        fontSize: height * 0.02,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                              onTap: () => {
+                                Get.offAll(
+                                  () => HasilCekOngkir(
+                                    jk: widget.jk,
+                                    kotaAsal: widget.kotaAsal,
+                                    kotaTujuan: widget.kotaTujuan,
+                                    totalPaket: widget.totalPaket,
+                                    namaSVG: widget.namaSVG,
+                                  ),
+                                  transition: Transition.fade,
+                                  duration: Duration(seconds: 1),
+                                )
+                              },
+                            ),
+                          ],
                         ),
-                      );
-                    }
-                  },
-                ))
+                      ),
+                    );
+                  } else {
+                    return SizedBox(
+                      width: width,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                },
+              ),
+            ),
           ],
         ),
         bottomNavigationBar: CustomBottomBar(activeIndex: 1),
