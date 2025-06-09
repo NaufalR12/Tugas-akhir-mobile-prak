@@ -93,8 +93,7 @@ flutter:
     - assets/logo/jnt.svg
     - assets/logo/sicepat.svg
     - assets/logo/pos.svg
-    - assets/logo/spx.svg
-    - assets/logo/default.svg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

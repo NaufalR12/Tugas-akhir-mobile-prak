@@ -41,33 +41,65 @@ class TrackingController extends GetxController {
 
   Future<Receipt> fetchData(String receipt, String jk) async {
     try {
-      if (jk == 'Shopee') {
+      final jkLower = jk.toLowerCase();
+      print('Debug - Input kurir: $jkLower'); // Debug log
+
+      if (jkLower.contains('shopee') || jkLower.contains('spx')) {
         kurir.value = "spx";
-      } else if (jk == 'SAP') {
+      } else if (jkLower.contains('sap')) {
         kurir.value = "sap";
-      } else if (jk == 'ID express') {
+      } else if (jkLower.contains('id express') || jkLower.contains('ide')) {
         kurir.value = "ide";
-      } else if (jk == 'J&T') {
+      } else if (jkLower.contains('j&t') || jkLower.contains('jnt')) {
         kurir.value = "jnt";
+      } else if (jkLower.contains('jne')) {
+        kurir.value = "jne";
+      } else if (jkLower.contains('sicepat')) {
+        kurir.value = "sicepat";
+      } else if (jkLower.contains('pos')) {
+        kurir.value = "pos";
+      } else if (jkLower.contains('anteraja')) {
+        kurir.value = "anteraja";
+      } else if (jkLower.contains('wahana')) {
+        kurir.value = "wahana";
+      } else if (jkLower.contains('ninja')) {
+        kurir.value = "ninja";
       } else {
-        kurir.value = jk;
+        kurir.value = jkLower;
       }
+      print('Debug - Mapped kurir value: ${kurir.value}'); // Debug log
+
       final ioc = new HttpClient();
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
-      final response = await http
-          .get(Uri.parse(
-              "https://api.binderbyte.com/v1/track?api_key=$apiKey&courier=${kurir.value}&awb=" +
-                  receipt))
-          .timeout(
+
+      final url =
+          "https://api.binderbyte.com/v1/track?api_key=$apiKey&courier=${kurir.value}&awb=$receipt";
+      print('Debug - API URL: $url'); // Debug log
+
+      final response = await http.get(Uri.parse(url)).timeout(
         const Duration(seconds: 4),
         onTimeout: () {
           throw 'Gagal mengambil data, mohon ulangi kembali';
         },
       );
+
+      print('Debug - Response status: ${response.statusCode}'); // Debug log
+      print('Debug - Response body: ${response.body}'); // Debug log
+
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
+
+        // Validasi response data
+        if (responseData['status'] == false) {
+          throw 'Error: ${responseData['message'] ?? "Unknown error"}';
+        }
+
+        if (responseData['data'] == null) {
+          throw 'Data tidak ditemukan';
+        }
+
         alamat = responseData['data']['detail']['destination'];
 
         // Simpan ke riwayat jika user sudah login
@@ -86,12 +118,18 @@ class TrackingController extends GetxController {
 
         return Receipt.fromJson(responseData);
       } else {
-        throw 'Gagal mengambil data, cek kembali inputan anda';
+        final errorData = jsonDecode(response.body);
+        throw 'Error ${response.statusCode}: ${errorData['message'] ?? "Unknown error"}';
       }
     } on SocketException {
       throw 'Mohon Cek internet anda';
     } on TimeoutException {
       throw 'Waktu habis. Silahkan Reload halaman';
+    } on FormatException catch (e) {
+      throw 'Format data tidak valid: $e';
+    } catch (e) {
+      print('Debug - Error caught: $e'); // Debug log
+      throw 'Terjadi kesalahan: $e';
     }
   }
 }

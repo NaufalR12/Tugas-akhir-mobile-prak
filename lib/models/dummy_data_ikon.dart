@@ -20,7 +20,7 @@ List<Svgikon> dummySvg = [
   Svgikon(
     id: "JNE",
     title: "JNE",
-    images: "assets/logo/JNE.svg",
+    images: "assets/logo/jne.svg",
   ),
   Svgikon(
     id: "JNT",
@@ -68,7 +68,7 @@ List<Svgikon> dummyJasa = [
   Svgikon(
     id: "JNE",
     title: "JNE",
-    images: "assets/logo/JNE.svg",
+    images: "assets/logo/jne.svg",
   ),
   Svgikon(
     id: "POS",

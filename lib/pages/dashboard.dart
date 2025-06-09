@@ -65,8 +65,9 @@ class _DashboardState extends State<Dashboard> {
       builder: (context) {
         return Container(
           padding: EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+          height: MediaQuery.of(context).size.height * 0.6,
+          child: ListView(
+            shrinkWrap: true,
             children: [
               Text('Pilih Ekspedisi',
                   style: GoogleFonts.roboto(
@@ -255,9 +256,44 @@ class _DashboardState extends State<Dashboard> {
                             duration: Duration(seconds: 3),
                           );
                         } else {
+                          String svgPath = '';
+                          final ekspedisi =
+                              trackController.namajs.value.toLowerCase();
+                          String kurirValue = '';
+                          if (ekspedisi.contains('jne')) {
+                            svgPath = 'assets/logo/jne.svg';
+                            kurirValue = 'jne';
+                          } else if (ekspedisi.contains('j&t')) {
+                            svgPath = 'assets/logo/jnt.svg';
+                            kurirValue = 'jnt';
+                          } else if (ekspedisi.contains('sicepat')) {
+                            svgPath = 'assets/logo/sicepat.svg';
+                            kurirValue = 'sicepat';
+                          } else if (ekspedisi.contains('pos')) {
+                            svgPath = 'assets/logo/pos.svg';
+                            kurirValue = 'pos';
+                          } else if (ekspedisi.contains('spx') ||
+                              ekspedisi.contains('shopee')) {
+                            svgPath = 'assets/logo/spx.svg';
+                            kurirValue = 'spx';
+                          } else if (ekspedisi.contains('anteraja')) {
+                            svgPath = 'assets/logo/anteraja.svg';
+                            kurirValue = 'anteraja';
+                          } else if (ekspedisi.contains('wahana')) {
+                            svgPath = 'assets/logo/wahana.svg';
+                            kurirValue = 'wahana';
+                          } else if (ekspedisi.contains('ninja')) {
+                            svgPath = 'assets/logo/ninja.svg';
+                            kurirValue = 'ninja';
+                          }
+                          if (svgPath.isEmpty) {
+                            svgPath = 'assets/logo/default.svg';
+                            kurirValue = ekspedisi;
+                          }
                           Get.toNamed('/tracking2', arguments: {
                             'nomorResi': trackController.receipt.text,
-                            'kurir': trackController.namajs.value,
+                            'kurir': kurirValue,
+                            'svg': svgPath,
                           });
                         }
                       },

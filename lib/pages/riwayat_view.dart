@@ -212,24 +212,24 @@ class _RiwayatViewState extends State<RiwayatView> {
                         onTap: () {
                           // Cari svg sesuai ekspedisi
                           String svgPath = '';
-                          if (riwayat.kurir.toLowerCase().contains('jne')) {
+                          final ekspedisi = riwayat.kurir.toLowerCase();
+                          if (ekspedisi.contains('jne')) {
                             svgPath = 'assets/logo/jne.svg';
-                          } else if (riwayat.kurir
-                              .toLowerCase()
-                              .contains('jnt')) {
+                          } else if (ekspedisi.contains('j&t')) {
                             svgPath = 'assets/logo/jnt.svg';
-                          } else if (riwayat.kurir
-                              .toLowerCase()
-                              .contains('sicepat')) {
+                          } else if (ekspedisi.contains('sicepat')) {
                             svgPath = 'assets/logo/sicepat.svg';
-                          } else if (riwayat.kurir
-                              .toLowerCase()
-                              .contains('pos')) {
+                          } else if (ekspedisi.contains('pos')) {
                             svgPath = 'assets/logo/pos.svg';
-                          } else if (riwayat.kurir
-                              .toLowerCase()
-                              .contains('spx')) {
+                          } else if (ekspedisi.contains('spx') ||
+                              ekspedisi.contains('shopee')) {
                             svgPath = 'assets/logo/spx.svg';
+                          } else if (ekspedisi.contains('anteraja')) {
+                            svgPath = 'assets/logo/anteraja.svg';
+                          } else if (ekspedisi.contains('wahana')) {
+                            svgPath = 'assets/logo/wahana.svg';
+                          } else if (ekspedisi.contains('ninja')) {
+                            svgPath = 'assets/logo/ninja.svg';
                           }
                           if (svgPath.isEmpty)
                             svgPath = 'assets/logo/default.svg';
