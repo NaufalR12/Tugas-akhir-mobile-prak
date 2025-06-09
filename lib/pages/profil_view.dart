@@ -56,7 +56,7 @@ class _ProfilViewState extends State<ProfilView> {
           IconButton(
             icon: Icon(
               isEditing ? Icons.save : Icons.edit,
-              color: Theme.of(context).primaryColor,
+              color: isEditing ? Colors.green : Colors.blue, // Warna kontras
             ),
             onPressed: () async {
               if (isEditing) {

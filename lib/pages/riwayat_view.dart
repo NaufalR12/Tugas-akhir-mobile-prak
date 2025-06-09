@@ -73,14 +73,25 @@ class _RiwayatViewState extends State<RiwayatView> {
     if (!authController.sudahLogin.value) {
       // Redirect ke halaman login jika belum login
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Get.offAllNamed('/login');
-        Get.snackbar(
-          'Akses Ditolak',
-          'Silahkan login terlebih dahulu untuk melihat riwayat pelacakan',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        if (Get.currentRoute != '/login') {
+          Get.offAllNamed('/login');
+          Get.snackbar(
+            'Akses Ditolak',
+            'Silahkan login terlebih dahulu untuk melihat riwayat pelacakan',
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
       });
       return Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+    // Error handling jika data riwayat null
+    final allRiwayat = riwayatController.daftarRiwayat;
+    if (allRiwayat == null) {
+      return Scaffold(
+        appBar: AppBar(title: Text('Riwayat Pelacakan')),
+        body: Center(
+            child: Text('Data riwayat tidak tersedia. Silakan login ulang.')),
+      );
     }
 
     return Scaffold(
@@ -132,7 +143,6 @@ class _RiwayatViewState extends State<RiwayatView> {
           ),
           Expanded(
             child: Obx(() {
-              final allRiwayat = riwayatController.daftarRiwayat;
               final filteredRiwayat = allRiwayat.where((riwayat) {
                 return riwayat.nomorResi.toLowerCase().contains(_searchText) ||
                     riwayat.kurir.toLowerCase().contains(_searchText);

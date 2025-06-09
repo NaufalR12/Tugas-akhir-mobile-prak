@@ -91,29 +91,9 @@ class _PengaturanState extends State<Pengaturan> {
                       ),
                     ),
                   ),
-                  child: ListTile(
-                    contentPadding: EdgeInsets.symmetric(
-                        horizontal: width * 0.05, vertical: width * 0.02),
-                    leading: Container(
-                      padding: EdgeInsets.all(width * 0.02),
-                      decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(width * 0.02),
-                      ),
-                      child: Icon(
-                        Icons.delete_forever_outlined,
-                        color: Colors.red,
-                        size: width * 0.06,
-                      ),
-                    ),
-                    title: Text(
-                      'Bersihkan History',
-                      style: GoogleFonts.roboto(
-                        fontSize: width * 0.04,
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
+                  child: defaultMenuTile(
+                    icon: Icons.delete_outline,
+                    text: 'Bersihkan History',
                     onTap: () {
                       Get.dialog(
                         AlertDialog(
@@ -148,6 +128,7 @@ class _PengaturanState extends State<Pengaturan> {
                         ),
                       );
                     },
+                    iconColor: Colors.red,
                   ),
                 ),
                 Container(
@@ -159,40 +140,11 @@ class _PengaturanState extends State<Pengaturan> {
                       ),
                     ),
                   ),
-                  child: Obx(() => ListTile(
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: width * 0.05, vertical: width * 0.02),
-                        leading: Container(
-                          padding: EdgeInsets.all(width * 0.02),
-                          decoration: BoxDecoration(
-                            color: (themeController.isDarkMode
-                                    ? Colors.amber
-                                    : Colors.grey)
-                                .withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(width * 0.02),
-                          ),
-                          child: Icon(
-                            themeController.isDarkMode
-                                ? Icons.light_mode
-                                : Icons.dark_mode,
-                            color: themeController.isDarkMode
-                                ? Colors.amber
-                                : Colors.grey,
-                            size: width * 0.06,
-                          ),
-                        ),
-                        title: Text(
-                          themeController.isDarkMode
-                              ? 'Mode Terang'
-                              : 'Mode Gelap',
-                          style: GoogleFonts.roboto(
-                            fontSize: width * 0.04,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        onTap: () => themeController.toggleTheme(),
-                      )),
+                  child: defaultMenuTile(
+                    icon: Icons.nightlight_round,
+                    text: 'Mode Gelap',
+                    onTap: () => themeController.toggleTheme(),
+                  ),
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -203,10 +155,9 @@ class _PengaturanState extends State<Pengaturan> {
                       ),
                     ),
                   ),
-                  child: ListTile(
-                    leading: Icon(Icons.location_on,
-                        color: Theme.of(context).primaryColor),
-                    title: Text('Cari Ekspedisi Terdekat'),
+                  child: defaultMenuTile(
+                    icon: Icons.location_on_outlined,
+                    text: 'Cari Ekspedisi Terdekat',
                     onTap: () {
                       Get.toNamed('/map');
                     },
@@ -221,10 +172,9 @@ class _PengaturanState extends State<Pengaturan> {
                       ),
                     ),
                   ),
-                  child: ListTile(
-                    leading: Icon(Icons.rate_review,
-                        color: Theme.of(context).primaryColor),
-                    title: Text('Kesan dan Saran'),
+                  child: defaultMenuTile(
+                    icon: Icons.edit_note,
+                    text: 'Kesan dan Saran',
                     onTap: () {
                       Get.to(() => HelpPage());
                     },
@@ -239,46 +189,11 @@ class _PengaturanState extends State<Pengaturan> {
                       ),
                     ),
                   ),
-                  child: ListTile(
-                    leading: Icon(Icons.currency_exchange, color: Colors.blue),
-                    title: Text('Konversi Mata Uang & Waktu'),
-                    onTap: () => Get.to(() => KonversiPage()),
-                  ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.grey.withOpacity(0.1),
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListTile(
-                    contentPadding: EdgeInsets.symmetric(
-                        horizontal: width * 0.05, vertical: width * 0.02),
-                    leading: Container(
-                      padding: EdgeInsets.all(width * 0.02),
-                      decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(width * 0.02),
-                      ),
-                      child: Icon(
-                        Icons.logout,
-                        color: Colors.red,
-                        size: width * 0.06,
-                      ),
-                    ),
-                    title: Text(
-                      'Logout',
-                      style: GoogleFonts.roboto(
-                        fontSize: width * 0.04,
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
+                  child: defaultMenuTile(
+                    icon: Icons.logout,
+                    text: 'Logout',
                     onTap: () async {
                       Get.dialog(
                         AlertDialog(
@@ -301,6 +216,7 @@ class _PengaturanState extends State<Pengaturan> {
                         ),
                       );
                     },
+                    iconColor: Colors.red,
                   ),
                 ),
               ],
@@ -309,6 +225,23 @@ class _PengaturanState extends State<Pengaturan> {
         ],
       ),
       bottomNavigationBar: CustomBottomBar(activeIndex: 2),
+    );
+  }
+
+  Widget defaultMenuTile({required IconData icon, required String text, required VoidCallback onTap, Color? iconColor}) {
+    return ListTile(
+      leading: Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Icon(icon, color: iconColor ?? Theme.of(context).primaryColor),
+      ),
+      title: Text(text, style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold)),
+      onTap: onTap,
+      horizontalTitleGap: 12,
+      minLeadingWidth: 0,
     );
   }
 }
