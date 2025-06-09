@@ -41,7 +41,24 @@ class OngkirController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        return Ongkir.fromJson(jsonDecode(response.body));
+        final data = jsonDecode(response.body);
+        // Cek error dari API RajaOngkir
+        if (data['rajaongkir'] == null ||
+            data['rajaongkir']['status'] == null ||
+            data['rajaongkir']['status']['code'] != 200) {
+          throw data['rajaongkir'] != null &&
+                  data['rajaongkir']['status'] != null
+              ? data['rajaongkir']['status']['description'] ??
+                  'Data ongkir tidak ditemukan'
+              : 'Data ongkir tidak ditemukan';
+        }
+        if (data['rajaongkir']['results'] == null ||
+            data['rajaongkir']['results'].isEmpty ||
+            data['rajaongkir']['results'][0]['costs'] == null ||
+            data['rajaongkir']['results'][0]['costs'].isEmpty) {
+          throw 'Tidak ada data ongkir ditemukan untuk inputan tersebut.';
+        }
+        return Ongkir.fromJson(data);
       } else {
         throw 'Gagal mengambil data, cek kembali inputan anda';
       }

@@ -245,10 +245,10 @@ class _Tracking2State extends State<Tracking2> {
                                               "" ||
                                           snapshot.data!.data!.detail?.origin ==
                                               null
-                                      ? "*****"
+                                      ? "Tidak diketahui"
                                       : snapshot.data!.data!.detail?.origin ??
-                                          "*****")
-                                  : "*****",
+                                          "Tidak diketahui")
+                                  : "Tidak diketahui",
                               style: GoogleFonts.roboto(
                                 color: Color.fromARGB(255, 246, 142, 37),
                                 fontSize: height * 0.015,
@@ -287,11 +287,11 @@ class _Tracking2State extends State<Tracking2> {
                                           snapshot.data!.data!.detail
                                                   ?.destination ==
                                               null
-                                      ? "*****"
+                                      ? "Tidak diketahui"
                                       : snapshot.data!.data!.detail
                                               ?.destination ??
-                                          "*****")
-                                  : "*****",
+                                          "Tidak diketahui")
+                                  : "Tidak diketahui",
                               style: GoogleFonts.roboto(
                                 color: Color.fromARGB(255, 246, 142, 37),
                                 fontSize: height * 0.015,

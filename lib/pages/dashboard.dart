@@ -274,7 +274,7 @@ class _DashboardState extends State<Dashboard> {
                             kurirValue = 'pos';
                           } else if (ekspedisi.contains('spx') ||
                               ekspedisi.contains('shopee')) {
-                            svgPath = 'assets/logo/spx.svg';
+                            svgPath = 'assets/logo/shopee.svg';
                             kurirValue = 'spx';
                           } else if (ekspedisi.contains('anteraja')) {
                             svgPath = 'assets/logo/anteraja.svg';

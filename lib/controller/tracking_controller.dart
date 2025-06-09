@@ -100,7 +100,12 @@ class TrackingController extends GetxController {
           throw 'Data tidak ditemukan';
         }
 
-        alamat = responseData['data']['detail']['destination'];
+        // Handle null/kosong pada detail kota
+        final detail = responseData['data']['detail'];
+        alamat = (detail['destination'] == null ||
+                detail['destination'].toString().isEmpty)
+            ? 'Tidak diketahui'
+            : detail['destination'];
 
         // Simpan ke riwayat jika user sudah login
         if (_authController.sudahLogin.value) {

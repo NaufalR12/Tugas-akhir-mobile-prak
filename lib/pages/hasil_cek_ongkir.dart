@@ -202,14 +202,54 @@ class _HasilCekOngkirState extends State<HasilCekOngkir> {
                       width: width,
                       height: width * 0.5,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            margin: EdgeInsets.all(20),
+                          Icon(Icons.error_outline,
+                              color: Colors.red, size: 48),
+                          SizedBox(height: 12),
+                          Text(
+                            'Data ongkir tidak ditemukan',
+                            style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.red,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
                             child: Text(
-                              '${snapshot.error}',
+                              snapshot.error.toString(),
                               textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
+                              style: GoogleFonts.roboto(
+                                fontSize: 16,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              Get.offAll(
+                                () => HasilCekOngkir(
+                                  jk: widget.jk,
+                                  kotaAsal: widget.kotaAsal,
+                                  kotaTujuan: widget.kotaTujuan,
+                                  totalPaket: widget.totalPaket,
+                                  namaSVG: widget.namaSVG,
+                                ),
+                                transition: Transition.fade,
+                                duration: Duration(seconds: 1),
+                              );
+                            },
+                            icon: Icon(Icons.refresh),
+                            label: Text('Coba Lagi'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromARGB(255, 2, 148, 46),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 24,
+                                vertical: 12,
+                              ),
                             ),
                           ),
                         ],
