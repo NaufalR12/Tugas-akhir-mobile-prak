@@ -334,24 +334,21 @@ class _CekOngkirState extends State<CekOngkir> {
                           onPressed: () {
                             if (kota_asal == null ||
                                 kota_tujuan == null ||
+                                berat == null ||
                                 berat == "" ||
+                                double.tryParse(berat) == null ||
+                                double.parse(berat) <= 0 ||
                                 controllerOngkir.namaJasa.value == "") {
                               Get.snackbar(
-                                "Pencarian Anda tidak ditemukan",
-                                "Silahkan isi semua kolom terlebih dahulu",
+                                "Input tidak valid",
+                                "Pastikan semua kolom terisi benar dan berat > 0",
                                 icon: Icon(Icons.block_outlined,
-                                    color: Theme.of(context).primaryColor),
+                                    color: Colors.red),
                                 snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: Theme.of(context)
-                                    .primaryColor
-                                    .withOpacity(0.1),
+                                backgroundColor: Colors.red.withOpacity(0.1),
                                 borderRadius: 20,
                                 margin: EdgeInsets.all(15),
-                                colorText: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.color ??
-                                    Colors.black,
+                                colorText: Colors.red,
                                 duration: Duration(seconds: 4),
                                 isDismissible: true,
                                 dismissDirection: DismissDirection.horizontal,

@@ -60,6 +60,22 @@ class _ProfilViewState extends State<ProfilView> {
             ),
             onPressed: () async {
               if (isEditing) {
+                if (namaLengkapController.text.trim().isEmpty ||
+                    alamatController.text.trim().isEmpty ||
+                    noHpController.text.trim().isEmpty) {
+                  Get.snackbar(
+                    'Error',
+                    'Nama lengkap, alamat, dan nomor HP tidak boleh kosong',
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.red.withOpacity(0.1),
+                    colorText: Colors.red,
+                    duration: Duration(seconds: 3),
+                    margin: EdgeInsets.all(width * 0.05),
+                    borderRadius: width * 0.02,
+                    icon: Icon(Icons.error_outline, color: Colors.red),
+                  );
+                  return;
+                }
                 try {
                   final success = await authController.perbaruiProfil(
                     idPengguna: authController.penggunaAktif.value!.id!,

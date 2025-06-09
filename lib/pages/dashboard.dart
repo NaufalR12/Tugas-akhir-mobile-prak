@@ -246,7 +246,13 @@ class _DashboardState extends State<Dashboard> {
                       ),
                       onPressed: () {
                         if (trackController.receipt.text.isEmpty) {
-                          gagal();
+                          Get.snackbar(
+                            "Resi kosong",
+                            "Silakan masukkan nomor resi terlebih dahulu",
+                            backgroundColor: Colors.red.withOpacity(0.1),
+                            colorText: Colors.red,
+                            duration: Duration(seconds: 3),
+                          );
                         } else if (trackController.namajs.value.isEmpty) {
                           Get.snackbar(
                             "Pilih Ekspedisi",

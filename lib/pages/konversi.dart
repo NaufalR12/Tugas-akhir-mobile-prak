@@ -97,7 +97,18 @@ class _KonversiPageState extends State<KonversiPage> {
             ),
             SizedBox(height: 8),
             ElevatedButton(
-              onPressed: konversiMataUang,
+              onPressed: () {
+                if (inputAmount == 0) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Masukkan jumlah yang valid!'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  return;
+                }
+                konversiMataUang();
+              },
               child: Text('Konversi'),
             ),
             SizedBox(height: 8),
