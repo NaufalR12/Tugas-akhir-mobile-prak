@@ -19,6 +19,7 @@ import 'pages/pengaturan.dart';
 import 'package:GoShipp/pages/kesan_saran.dart';
 import 'package:GoShipp/pages/tracking.dart';
 import 'package:GoShipp/pages/konversi.dart';
+import 'package:GoShipp/pages/map_screen.dart';
 
 // Variabel warna untuk mode terang (light) dan gelap (dark) agar konsisten di seluruh halaman.
 const Color lightPrimaryColor = Color(0xFF00C3D4);
@@ -40,10 +41,7 @@ void main() async {
 
   // Inisialisasi database
   final databasePath = await getDatabasesPath();
-  final path = join(databasePath, 'paketku.db');
-
-  // Hapus database lama jika ada
-  await deleteDatabase(path);
+  final path = join(databasePath, 'GoShipp.db');
 
   // Inisialisasi controller
   Get.put(AuthController());
@@ -63,7 +61,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => GetMaterialApp(
-          title: 'PaketKU',
+          title: 'GoShipp',
           theme: ThemeData.light().copyWith(
             primaryColor: lightPrimaryColor,
             scaffoldBackgroundColor: lightScaffoldColor,
@@ -113,6 +111,7 @@ class MyApp extends StatelessWidget {
                   );
                 }),
             GetPage(name: '/konversi', page: () => KonversiPage()),
+            GetPage(name: '/map', page: () => MapScreen()),
           ],
         ));
   }
@@ -161,24 +160,7 @@ class _SplashState extends State<Splash> {
               height: 100,
               child: Image.asset('assets/icon/icon.png'),
             ),
-            Text(
-              'PaketKU',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.roboto(
-                fontWeight: FontWeight.bold,
-                fontSize: 30.0,
-                color: Color.fromARGB(255, 246, 142, 37),
-              ),
-            ),
-            Text(
-              'Developed by Yoga Dev.',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.roboto(
-                fontWeight: FontWeight.bold,
-                fontSize: 12.0,
-                color: Color.fromARGB(255, 5, 78, 94),
-              ),
-            ),
+            
             SizedBox(
               height: 50,
             ),
