@@ -103,24 +103,21 @@ class _MapScreenState extends State<MapScreen> {
     final query = '''
     [out:json];
     (
-      node["shop"="courier"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["amenity"="post_office"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["shop"="logistics"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["shop"="shipping"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["amenity"="post_depot"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["amenity"="ekspedisi"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["shop"="ekspedisi"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["shop"="delivery"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["shop"="parcel"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["shop"="freight_forwarding"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["shop"="cargo"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["amenity"="post_office"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["amenity"="post_depot"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["amenity"="parcel_locker"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["shop"="ekspedisi"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["amenity"="ekspedisi"](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-      node["name"~"JNE|J&T|TIKI|SiCepat|Anteraja|POS Indonesia",i](around:2000,${_mylocation!.latitude},${_mylocation!.longitude});
-
+      node["shop"="courier"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["amenity"="post_office"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["shop"="logistics"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["shop"="shipping"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["amenity"="post_depot"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["amenity"="ekspedisi"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["shop"="ekspedisi"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["shop"="delivery"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["shop"="parcel"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["shop"="freight_forwarding"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["shop"="cargo"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["amenity"="parcel_locker"](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["name"~"JNE|J&T|TIKI|SiCepat|Anteraja|POS Indonesia",i](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["operator"~"JNE|J&T|TIKI|SiCepat|Anteraja",i](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
+      node["description"~"JNE|J&T|TIKI|SiCepat|Anteraja",i](around:10000,${_mylocation!.latitude},${_mylocation!.longitude});
 
     );
     out body;
@@ -144,13 +141,7 @@ class _MapScreenState extends State<MapScreen> {
           IconData iconData;
           Color iconColor;
 
-          if (type == 'bank') {
-            iconData = Icons.account_balance;
-            iconColor = Colors.blueAccent;
-          } else if (type == 'atm') {
-            iconData = Icons.atm;
-            iconColor = Colors.green;
-          } else if (type == 'courier' ||
+          if (type == 'courier' ||
               type == 'post_office' ||
               type == 'logistics' ||
               type == 'shipping' ||
@@ -430,11 +421,7 @@ class _MapScreenState extends State<MapScreen> {
   // Fungsi untuk menampilkan detail lokasi
   void _showLocationDetails(String name, String type) {
     String locationType;
-    if (type == 'bank') {
-      locationType = 'Bank';
-    } else if (type == 'atm') {
-      locationType = 'ATM';
-    } else if (type == 'courier') {
+    if (type == 'courier') {
       locationType = 'Ekspedisi';
     } else if (type == 'post_office') {
       locationType = 'Kantor Pos';
@@ -529,7 +516,7 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bank, ATM & Ekspedisi Terdekat'),
+        title: const Text('Ekspedisi Terdekat'),
       ),
       body: Stack(
         children: [
